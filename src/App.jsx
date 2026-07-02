@@ -17,7 +17,34 @@ function App() {
       <Booking />
       <Contact />
       <Footer />
+      <BackToTop />
     </div>
+  );
+}
+
+function BackToTop() {
+  const [showButton, setShowButton] = useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      setShowButton(window.scrollY > 500);
+    }
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <button
+      className={showButton ? 'back-to-top show' : 'back-to-top'}
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      aria-label="Back to top"
+    >
+      ↑
+    </button>
   );
 }
 
@@ -48,24 +75,41 @@ function ScrollReveal() {
   return null;
 }
 
-
 function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  function closeMenu() {
+    setIsMenuOpen(false);
+  }
+
   return (
     <nav className="navbar">
-      <div className="logo-wrap">
+      <a href="#" className="logo-wrap" onClick={closeMenu}>
         <img src="/images/logo.jpg" alt="Next Level Auto Care logo" />
         <span>Next Level Auto Care</span>
-      </div>
+      </a>
 
-      <div className="nav-links">
-        <a href="#services">Services</a>
-        <a href="#packages">Packages</a>
-        <a href="#work">Our Work</a>
-        <a href="#booking">Book Now</a>
+      <button
+        className={isMenuOpen ? 'menu-toggle active' : 'menu-toggle'}
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        aria-label="Toggle navigation menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div className={isMenuOpen ? 'nav-links open' : 'nav-links'}>
+        <a href="#services" onClick={closeMenu}>Services</a>
+        <a href="#packages" onClick={closeMenu}>Packages</a>
+        <a href="#work" onClick={closeMenu}>Our Work</a>
+        <a href="#booking" onClick={closeMenu}>Book Now</a>
+        <a href="#contact" onClick={closeMenu}>Contact</a>
       </div>
     </nav>
   );
 }
+
 
 function Hero() {
   return (
