@@ -218,8 +218,8 @@ function BeforeAfterSlider() {
           style={{ left: `${sliderPosition}%` }}
         ></div>
 
-        <span className="before-label">Before</span>
-        <span className="after-label">After</span>
+        <span className="before-label">After</span>
+<span className="after-label">Before</span>
 
         <div className="bottom-slider-track">
           <div
