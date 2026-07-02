@@ -14,6 +14,7 @@ function App() {
       <OurWork />
       <Process />
       <WhyChooseUs />
+      <Booking />
       <Contact />
       <Footer />
     </div>
@@ -60,7 +61,7 @@ function Navbar() {
         <a href="#services">Services</a>
         <a href="#packages">Packages</a>
         <a href="#work">Our Work</a>
-        <a href="#contact">Book Now</a>
+        <a href="#booking">Book Now</a>
       </div>
     </nav>
   );
@@ -69,6 +70,10 @@ function Navbar() {
 function Hero() {
   return (
     <section className="hero">
+      <video className="hero-video" autoPlay muted loop playsInline>
+        <source src="/videos/hero-video.mp4" type="video/mp4" />
+      </video>
+
       <div className="hero-overlay">
         <div className="hero-content">
           <p className="eyebrow">Mobile Auto Detailing</p>
@@ -79,13 +84,13 @@ function Hero() {
           </p>
 
           <div className="hero-buttons">
-            <a href="tel:7783255428" className="btn primary">
-              Call Now
-            </a>
-            <a href="#work" className="btn secondary">
-              See Our Work
-            </a>
-          </div>
+  <a href="#booking" className="btn primary">
+    Book Now
+  </a>
+  <a href="#work" className="btn secondary">
+    See Our Work
+  </a>
+</div>
         </div>
       </div>
     </section>
@@ -425,6 +430,126 @@ function WhyChooseUs() {
   </div>
 </div>
 
+      </div>
+    </section>
+  );
+}
+function Booking() {
+  const [result, setResult] = useState('');
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setResult('Sending...');
+
+    const formData = new FormData(event.target);
+    formData.append('access_key', 'c2169b3a-583e-4cfb-8122-fada5070ca61');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("Thanks! Your booking request was sent. We'll contact you shortly.");
+        event.target.reset();
+      } else {
+        setResult('Something went wrong. Please call or text us instead.');
+      }
+    } catch {
+      setResult('Something went wrong. Please call or text us instead.');
+    }
+  }
+
+  return (
+    <section className="booking-section reveal" id="booking">
+      <div className="booking-content">
+        <p className="eyebrow center">Booking Request</p>
+        <h2>Request a Detail</h2>
+        <p className="section-subtitle">
+          Tell us about your vehicle and the service you need. We’ll contact you
+          to confirm pricing, availability, and location.
+        </p>
+
+        <form className="booking-form" onSubmit={handleSubmit}>
+          <div className="form-row">
+            <div className="form-group">
+              <label>Name</label>
+              <input type="text" name="name" placeholder="Your name" required />
+            </div>
+
+            <div className="form-group">
+              <label>Phone Number</label>
+              <input type="tel" name="phone" placeholder="778-000-0000" required />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label>Email</label>
+              <input type="email" name="email" placeholder="you@email.com" required />
+            </div>
+
+            <div className="form-group">
+              <label>Vehicle</label>
+              <input
+                type="text"
+                name="vehicle"
+                placeholder="Year, make, model"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label>Service Needed</label>
+              <select name="service" required>
+                <option value="">Select a service</option>
+                <option value="Interior Detail">Interior Detail</option>
+                <option value="Exterior Detail">Exterior Detail</option>
+                <option value="Full Detail">Full Detail</option>
+                <option value="Paint Correction">Paint Correction</option>
+                <option value="Ceramic Coating">Ceramic Coating</option>
+                <option value="Not Sure">Not Sure</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Location / City</label>
+              <input type="text" name="location" placeholder="Surrey, Delta, Langley..." required />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label>Preferred Date</label>
+              <input type="date" name="preferred_date" />
+            </div>
+
+            <div className="form-group">
+              <label>Preferred Time</label>
+              <input type="time" name="preferred_time" />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Message</label>
+            <textarea
+              name="message"
+              rows="5"
+              placeholder="Tell us about the vehicle condition, stains, pet hair, coating needs, etc."
+            ></textarea>
+          </div>
+
+          <button type="submit" className="btn primary booking-btn">
+            Submit Booking Request
+          </button>
+
+          {result && <p className="form-result">{result}</p>}
+        </form>
       </div>
     </section>
   );
