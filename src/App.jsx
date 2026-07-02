@@ -201,25 +201,24 @@ function BeforeAfterSlider() {
     <div className="before-after-card">
       <div className="before-after-slider">
         <img
-          src="/images/porsche-after.jpeg"
-          alt="After detailing"
-          className="compare-image after-image"
-        />
+  src="/images/porsche-before.png"
+  alt="Before detailing"
+  className="compare-image after-image"
+/>
 
-        <img
-          src="/images/porsche-before.png"
-          alt="Before detailing"
-          className="compare-image before-image"
-          style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-        />
+<img
+  src="/images/porsche-after.jpeg"
+  alt="After detailing"
+  className="compare-image before-image"
+  style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+/>
 
         <div
           className="slider-line"
           style={{ left: `${sliderPosition}%` }}
         ></div>
 
-        <span className="before-label">After</span>
-<span className="after-label">Before</span>
+    
 
         <div className="bottom-slider-track">
           <div
