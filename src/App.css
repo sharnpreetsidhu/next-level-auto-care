@@ -622,12 +622,18 @@ footer {
 
 .slider-input {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  left: 18px;
+  right: 18px;
+  bottom: 0;
+  width: calc(100% - 36px);
+  height: 58px;
   opacity: 0;
   cursor: ew-resize;
   z-index: 20;
+}
+
+.before-after-slider {
+  touch-action: pan-y;
 }
 
 .reveal {
@@ -767,6 +773,10 @@ footer {
 
 /* Mobile */
 @media (max-width: 900px) {
+    .hero,
+  .hero-overlay {
+    min-height: 100svh;
+  }
   .navbar {
     padding: 14px 5%;
   }
@@ -829,6 +839,14 @@ footer {
     font-size: 1.2rem;
     padding: 15px 24px;
   }
+
+    .slider-input {
+    left: 14px;
+    right: 14px;
+    width: calc(100% - 28px);
+    height: 60px;
+  }
+  
     .before-after-card {
     max-width: 100%;
     padding: 10px;
@@ -906,8 +924,21 @@ footer {
 
 .primary:hover::after {
   left: 120%;
+}
 
-    .booking-section {
+.made-by {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #bdbdbd;
+}
+
+.made-by span {
+  color: #d4af37;
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .booking-section {
     padding: 75px 5%;
   }
 
@@ -920,5 +951,4 @@ footer {
     grid-template-columns: 1fr;
     gap: 0;
   }
-  
 }

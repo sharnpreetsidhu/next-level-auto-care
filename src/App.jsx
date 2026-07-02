@@ -70,9 +70,17 @@ function Navbar() {
 function Hero() {
   return (
     <section className="hero">
-      <video className="hero-video" autoPlay muted loop playsInline>
-        <source src="/videos/hero-video.mp4" type="video/mp4" />
-      </video>
+      <video
+  className="hero-video"
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="auto"
+  onCanPlay={(event) => event.currentTarget.play().catch(() => {})}
+>
+  <source src="/videos/hero-video.mp4" type="video/mp4" />
+</video>
 
       <div className="hero-overlay">
         <div className="hero-content">
@@ -576,6 +584,9 @@ function Footer() {
   return (
     <footer>
       <p>© 2026 Next Level Auto Care. All rights reserved.</p>
+      <p className="made-by">
+        Website by <span>Pacific Tech Solutions</span>
+      </p>
     </footer>
   );
 }
