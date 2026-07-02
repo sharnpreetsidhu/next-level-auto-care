@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
+
+
 
 function App() {
   return (
     <div>
+      <ScrollReveal />
       <Navbar />
       <Hero />
       <Services />
@@ -16,6 +19,34 @@ function App() {
     </div>
   );
 }
+
+function ScrollReveal() {
+  useEffect(() => {
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+      }
+    );
+
+    revealElements.forEach((element) => observer.observe(element));
+
+    return () => {
+      revealElements.forEach((element) => observer.unobserve(element));
+    };
+  }, []);
+
+  return null;
+}
+
 
 function Navbar() {
   return (
@@ -90,7 +121,7 @@ function Services() {
   ];
 
   return (
-    <section className="section" id="services">
+    <section className="section reveal" id="services">
       <p className="eyebrow center">What We Do</p>
       <h2>Detailing Services</h2>
       <p className="section-subtitle">
@@ -99,7 +130,7 @@ function Services() {
 
       <div className="services-grid">
         {services.map((service, index) => (
-          <div className="service-card" key={index}>
+          <div className="service-card reveal" key={index}>
             <h3>{service.title}</h3>
             <p>{service.text}</p>
           </div>
@@ -129,13 +160,13 @@ function Packages() {
   ];
 
   return (
-    <section className="packages-section" id="packages">
+    <section className="packages-section reveal" id="packages">
       <p className="eyebrow center">Choose Your Detail</p>
       <h2>Popular Packages</h2>
 
       <div className="packages-grid">
         {packages.map((pkg, index) => (
-          <div className="package-card" key={index}>
+          <div className="package-card reveal" key={index}>
             <h3>{pkg.name}</h3>
             <p>{pkg.description}</p>
 
@@ -150,6 +181,59 @@ function Packages() {
     </section>
   );
 }
+function BeforeAfterSlider() {
+  const [sliderPosition, setSliderPosition] = useState(50);
+
+  return (
+    <div className="before-after-card">
+      <div className="before-after-slider">
+        <img
+          src="/images/porsche-after.jpeg"
+          alt="After detailing"
+          className="compare-image after-image"
+        />
+
+        <img
+          src="/images/porsche-before.png"
+          alt="Before detailing"
+          className="compare-image before-image"
+          style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+        />
+
+        <div
+          className="slider-line"
+          style={{ left: `${sliderPosition}%` }}
+        ></div>
+
+        <span className="before-label">Before</span>
+        <span className="after-label">After</span>
+
+        <div className="bottom-slider-track">
+          <div
+            className="bottom-slider-fill"
+            style={{ width: `${sliderPosition}%` }}
+          ></div>
+
+          <div
+            className="bottom-slider-handle"
+            style={{ left: `${sliderPosition}%` }}
+          ></div>
+        </div>
+
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={sliderPosition}
+          onChange={(event) => setSliderPosition(event.target.value)}
+          className="slider-input"
+          aria-label="Before and after image slider"
+        />
+      </div>
+    </div>
+  );
+}
+
 function OurWork() {
   const images = [
     {
@@ -208,14 +292,17 @@ function OurWork() {
   }
 
   return (
-    <section className="section work-section" id="work">
+    <section className="section work-section reveal" id="work">
       <p className="eyebrow center">Results Matter</p>
       <h2>Our Work</h2>
       <p className="section-subtitle">
-        View recent detailing, paint correction, ceramic coating, and mobile detailing work.
-      </p>
+  View recent detailing, paint correction, ceramic coating, and mobile detailing work.
+</p>
 
-      <div className="slideshow">
+<BeforeAfterSlider />
+
+<div className="slideshow reveal">
+
         <button className="slide-btn left" onClick={previousSlide}>
           ‹
         </button>
@@ -281,36 +368,37 @@ function OurWork() {
 
 function Process() {
   return (
-    <section className="process-section">
+    <section className="process-section reveal">
       <p className="eyebrow center">How It Works</p>
       <h2>Simple Booking Process</h2>
 
       <div className="process-grid">
-        <div>
-          <span>01</span>
-          <h3>Call or Text</h3>
-          <p>Tell us what vehicle you have and what service you need.</p>
-        </div>
+  <div className="reveal">
+    <span>01</span>
+    <h3>Call or Text</h3>
+    <p>Tell us what vehicle you have and what service you need.</p>
+  </div>
 
-        <div>
-          <span>02</span>
-          <h3>Get a Quote</h3>
-          <p>We recommend the right detail or protection package.</p>
-        </div>
+  <div className="reveal">
+    <span>02</span>
+    <h3>Get a Quote</h3>
+    <p>We recommend the right detail or protection package.</p>
+  </div>
 
-        <div>
-          <span>03</span>
-          <h3>We Come To You</h3>
-          <p>Your vehicle gets detailed at your home, workplace, or location.</p>
-        </div>
-      </div>
+  <div className="reveal">
+    <span>03</span>
+    <h3>We Come To You</h3>
+    <p>Your vehicle gets detailed at your home, workplace, or location.</p>
+  </div>
+</div>
+
     </section>
   );
 }
 
 function WhyChooseUs() {
   return (
-    <section className="why-section">
+    <section className="why-section reveal">
       <div className="why-content">
         <p className="eyebrow">Why Us</p>
         <h2>Clean Results. Careful Work. Mobile Convenience.</h2>
@@ -320,22 +408,23 @@ function WhyChooseUs() {
           workmanship, paint-safe methods, and clean results.
         </p>
 
-        <div className="why-points">
-          <div>
-            <h3>Mobile Service</h3>
-            <p>We come directly to your location.</p>
-          </div>
+     <div className="why-points">
+  <div className="reveal">
+    <h3>Mobile Service</h3>
+    <p>We come directly to your location.</p>
+  </div>
 
-          <div>
-            <h3>Gloss & Protection</h3>
-            <p>Services designed to improve shine and protect your finish.</p>
-          </div>
+  <div className="reveal">
+    <h3>Gloss & Protection</h3>
+    <p>Services designed to improve shine and protect your finish.</p>
+  </div>
 
-          <div>
-            <h3>Attention To Detail</h3>
-            <p>Careful cleaning inside and outside your vehicle.</p>
-          </div>
-        </div>
+  <div className="reveal">
+    <h3>Attention To Detail</h3>
+    <p>Careful cleaning inside and outside your vehicle.</p>
+  </div>
+</div>
+
       </div>
     </section>
   );
@@ -343,7 +432,7 @@ function WhyChooseUs() {
 
 function Contact() {
   return (
-    <section className="contact-section" id="contact">
+    <section className="contact-section reveal" id="contact">
       <p className="eyebrow center">Book Now</p>
       <h2>Ready For A Cleaner Vehicle?</h2>
       <p>
