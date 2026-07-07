@@ -826,7 +826,7 @@ function Contact() {
     rel="noopener noreferrer"
     aria-label="Instagram"
   >
-    <img src="/images/instagram.webp" alt="Instagram" />
+    <img src="/images/Instagram.png" alt="Instagram" />
   </a>
 
   <a
