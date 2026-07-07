@@ -355,11 +355,26 @@ z-index: 2;
   bottom: 18px;
 }
 
+.slide-image-wrap {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid #252525;
+  background: #050505;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .slide-image-wrap img {
   width: 100%;
-  height: 560px;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
   display: block;
+  background: #050505;
+  cursor: pointer;
 }
 
 .slide-caption {
@@ -1050,4 +1065,249 @@ footer {
     grid-template-columns: 1fr;
     gap: 0;
   }
+}
+
+.booking-step-form {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 480px;
+}
+
+.step-top {
+  margin-bottom: 30px;
+}
+
+.step-label {
+  color: #d4af37;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+}
+
+.step-top h3 {
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  margin-bottom: 20px;
+}
+
+.step-progress {
+  width: 100%;
+  height: 8px;
+  background: #070707;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid #2c2c2c;
+}
+
+.step-progress span {
+  display: block;
+  height: 100%;
+  background: #d4af37;
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+
+.step-screen {
+  animation: stepFade 0.25s ease;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.choice-card {
+  min-height: 82px;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid #303030;
+  background: #080808;
+  color: white;
+  font-weight: 900;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.choice-card:hover,
+.choice-card.selected {
+  border-color: #d4af37;
+  background: rgba(212, 175, 55, 0.12);
+  transform: translateY(-2px);
+}
+
+.step-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.step-back {
+  background: transparent;
+  border: 1px solid #444;
+  color: white;
+  cursor: pointer;
+}
+
+.step-next {
+  border: none;
+  cursor: pointer;
+}
+
+.step-contact {
+  margin-top: 20px;
+}
+
+@keyframes stepFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 700px) {
+  .booking-step-form {
+    min-height: 520px;
+  }
+
+  .choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .choice-card {
+    min-height: 68px;
+  }
+
+  .step-actions {
+    flex-direction: column;
+  }
+
+  .step-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.quick-contact-buttons {
+  margin-top: 22px;
+}
+
+.quick-contact-buttons p {
+  color: #cfcfcf;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.quick-contact-buttons {
+  margin-top: 22px;
+}
+
+.quick-contact-buttons p {
+  color: #cfcfcf;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.contact-icon-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact-icon-btn {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #d4af37;
+  color: black;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.45rem;
+  transition: 0.2s ease;
+}
+
+.contact-icon-btn:nth-child(2) {
+  background: transparent;
+  color: white;
+  border: 1px solid #444;
+}
+
+.contact-icon-btn:hover {
+  transform: translateY(-2px);
+  border-color: #d4af37;
+}
+
+.contact-icon-btn:nth-child(2):hover {
+  color: #d4af37;
+}
+
+.contact-action-btn:hover {
+  transform: translateY(-2px);
+}
+
+.secondary-contact-btn:hover {
+  border-color: #d4af37;
+  color: #d4af37;
+}
+
+@media (max-width: 700px) {
+  .contact-button-row {
+    flex-direction: column;
+  }
+
+  .contact-action-btn {
+    width: 100%;
+  }
+}
+
+.social-links {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  max-width: 48px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid #333;
+  background: rgba(255, 255, 255, 0.05);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: 0.2s ease;
+}
+
+.social-links a:hover {
+  border-color: #d4af37;
+  transform: translateY(-2px);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.social-links img {
+  width: 24px !important;
+  height: 24px !important;
+  max-width: 24px !important;
+  max-height: 24px !important;
+  object-fit: contain;
+  display: block;
 }

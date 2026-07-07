@@ -329,13 +329,24 @@ function OurWork() {
   const [currentImage, setCurrentImage] = useState(0);
   const [isImageOpen, setIsImageOpen] = useState(false);
 
-  function nextSlide() {
-    setCurrentImage((currentImage + 1) % images.length);
-  }
+  useEffect(() => {
+  if (isImageOpen) return;
 
-  function previousSlide() {
-    setCurrentImage((currentImage - 1 + images.length) % images.length);
-  }
+  const timer = setInterval(() => {
+    setCurrentImage((previousImage) => (previousImage + 1) % images.length);
+  }, 3500);
+
+  return () => clearInterval(timer);
+}, [isImageOpen, images.length]);
+
+function nextSlide() {
+  setCurrentImage((previousImage) => (previousImage + 1) % images.length);
+}
+
+function previousSlide() {
+  setCurrentImage((previousImage) => (previousImage - 1 + images.length) % images.length);
+}
+
 
   function nextModalImage(event) {
     event.stopPropagation();
@@ -485,27 +496,79 @@ function WhyChooseUs() {
     </section>
   );
 }
+
 function Booking() {
+  const [step, setStep] = useState(1);
   const [result, setResult] = useState('');
+  const [formData, setFormData] = useState({
+    service: '',
+    vehicle: '',
+    location: '',
+    preferred_date: '',
+    preferred_time: '',
+    name: '',
+    phone: '',
+    email: '',
+    message: '',
+  });
+
+  const totalSteps = 6;
+
+  function updateField(event) {
+    const { name, value } = event.target;
+
+    setFormData((previousData) => ({
+      ...previousData,
+      [name]: value,
+    }));
+  }
+
+  function nextStep() {
+    setStep((previousStep) => Math.min(previousStep + 1, totalSteps));
+  }
+
+  function previousStep() {
+    setStep((previousStep) => Math.max(previousStep - 1, 1));
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
     setResult('Sending...');
 
-    const formData = new FormData(event.target);
-    formData.append('access_key', 'c2169b3a-583e-4cfb-8122-fada5070ca61');
+    const data = new FormData();
+    data.append('access_key', 'c2169b3a-583e-4cfb-8122-fada5070ca61');
+    data.append('service', formData.service);
+    data.append('vehicle', formData.vehicle);
+    data.append('location', formData.location);
+    data.append('preferred_date', formData.preferred_date);
+    data.append('preferred_time', formData.preferred_time);
+    data.append('name', formData.name);
+    data.append('phone', formData.phone);
+    data.append('email', formData.email);
+    data.append('message', formData.message);
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formData,
+        body: data,
       });
 
-      const data = await response.json();
+      const responseData = await response.json();
 
-      if (data.success) {
+      if (responseData.success) {
         setResult("Thanks! Your booking request was sent. We'll contact you shortly.");
-        event.target.reset();
+        setStep(1);
+        setFormData({
+          service: '',
+          vehicle: '',
+          location: '',
+          preferred_date: '',
+          preferred_time: '',
+          name: '',
+          phone: '',
+          email: '',
+          message: '',
+        });
       } else {
         setResult('Something went wrong. Please call or text us instead.');
       }
@@ -518,86 +581,221 @@ function Booking() {
     <section className="booking-section reveal" id="booking">
       <div className="booking-content">
         <p className="eyebrow center">Booking Request</p>
-        <h2>Request a Detail</h2>
+        <h2>Request a Service</h2>
         <p className="section-subtitle">
-          Tell us about your vehicle and the service you need. We’ll contact you
-          to confirm pricing, availability, and location.
+          Answer a few quick questions and we’ll contact you to confirm pricing,
+          availability, and location.
         </p>
 
-        <form className="booking-form" onSubmit={handleSubmit}>
-          <div className="form-row">
-            <div className="form-group">
-              <label>Name</label>
-              <input type="text" name="name" placeholder="Your name" required />
+        <form className="booking-form booking-step-form" onSubmit={handleSubmit}>
+          <div className="step-top">
+            <div>
+              <p className="step-label">Step {step} of {totalSteps}</p>
+              <h3>
+                {step === 1 && 'What service do you need?'}
+                {step === 2 && 'What vehicle are we detailing?'}
+                {step === 3 && 'Where are you located?'}
+                {step === 4 && 'When works best?'}
+                {step === 5 && 'How can we contact you?'}
+                {step === 6 && 'Anything else we should know?'}
+              </h3>
             </div>
 
-            <div className="form-group">
-              <label>Phone Number</label>
-              <input type="tel" name="phone" placeholder="778-000-0000" required />
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label>Email</label>
-              <input type="email" name="email" placeholder="you@email.com" required />
-            </div>
-
-            <div className="form-group">
-              <label>Vehicle</label>
-              <input
-                type="text"
-                name="vehicle"
-                placeholder="Year, make, model"
-                required
-              />
+            <div className="step-progress">
+              <span style={{ width: `${(step / totalSteps) * 100}%` }}></span>
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <label>Service Needed</label>
-              <select name="service" required>
-                <option value="">Select a service</option>
-                <option value="Interior Detail">Interior Detail</option>
-                <option value="Exterior Detail">Exterior Detail</option>
-                <option value="Full Detail">Full Detail</option>
-                <option value="Paint Correction">Paint Correction</option>
-                <option value="Ceramic Coating">Ceramic Coating</option>
-                <option value="Not Sure">Not Sure</option>
-              </select>
+          {step === 1 && (
+            <div className="step-screen">
+              <div className="choice-grid">
+                {[
+                  'Interior Detail',
+                  'Exterior Detail',
+                  'Full Detail',
+                  'Paint Correction',
+                  'Ceramic Coating',
+                  'Customization',
+                ].map((service) => (
+                  <button
+                    type="button"
+                    key={service}
+                    className={
+                      formData.service === service
+                        ? 'choice-card selected'
+                        : 'choice-card'
+                    }
+                    onClick={() =>
+                      setFormData((previousData) => ({
+                        ...previousData,
+                        service,
+                      }))
+                    }
+                  >
+                    {service}
+                  </button>
+                ))}
+              </div>
             </div>
+          )}
 
-            <div className="form-group">
-              <label>Location / City</label>
-              <input type="text" name="location" placeholder="Surrey, Delta, Langley..." required />
+          {step === 2 && (
+            <div className="step-screen">
+              <div className="form-group">
+                <label>Vehicle</label>
+                <input
+                  type="text"
+                  name="vehicle"
+                  placeholder="Year, make, model"
+                  value={formData.vehicle}
+                  onChange={updateField}
+                  required
+                />
+              </div>
             </div>
+          )}
+
+          {step === 3 && (
+            <div className="step-screen">
+              <div className="form-group">
+                <label>Location / City</label>
+                <input
+                  type="text"
+                  name="location"
+                  placeholder="Surrey, Delta, Langley..."
+                  value={formData.location}
+                  onChange={updateField}
+                  required
+                />
+              </div>
+            </div>
+          )}
+
+          {step === 4 && (
+            <div className="step-screen">
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Preferred Date</label>
+                  <input
+                    type="date"
+                    name="preferred_date"
+                    value={formData.preferred_date}
+                    onChange={updateField}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Preferred Time</label>
+                  <input
+                    type="time"
+                    name="preferred_time"
+                    value={formData.preferred_time}
+                    onChange={updateField}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {step === 5 && (
+            <div className="step-screen">
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your name"
+                    value={formData.name}
+                    onChange={updateField}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Phone Number</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="778-000-0000"
+                    value={formData.phone}
+                    onChange={updateField}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label>Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="you@email.com"
+                  value={formData.email}
+                  onChange={updateField}
+                  required
+                />
+              </div>
+            </div>
+          )}
+
+          {step === 6 && (
+            <div className="step-screen">
+              <div className="form-group">
+                <label>Message</label>
+                <textarea
+                  name="message"
+                  rows="5"
+                  placeholder="Tell us about the vehicle condition, stains, pet hair, coating needs, etc."
+                  value={formData.message}
+                  onChange={updateField}
+                ></textarea>
+              </div>
+            </div>
+          )}
+
+          <div className="step-actions">
+            {step > 1 && (
+              <button
+                type="button"
+                className="btn secondary step-back"
+                onClick={previousStep}
+              >
+                Back
+              </button>
+            )}
+
+            {step < totalSteps && (
+              <button
+                type="button"
+                className="btn primary step-next"
+                onClick={nextStep}
+              >
+                Continue
+              </button>
+            )}
+
+            {step === totalSteps && (
+              <button type="submit" className="btn primary step-next">
+                Submit Booking Request
+              </button>
+            )}
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <label>Preferred Date</label>
-              <input type="date" name="preferred_date" />
-            </div>
+          <div className="quick-contact-buttons step-contact">
+  <p>Prefer talking directly?</p>
 
-            <div className="form-group">
-              <label>Preferred Time</label>
-              <input type="time" name="preferred_time" />
-            </div>
-          </div>
+  <div className="contact-icon-row">
+    <a href="tel:7783255428" className="contact-icon-btn" aria-label="Call Next Level Auto Care">
+      📞
+    </a>
 
-          <div className="form-group">
-            <label>Message</label>
-            <textarea
-              name="message"
-              rows="5"
-              placeholder="Tell us about the vehicle condition, stains, pet hair, coating needs, etc."
-            ></textarea>
-          </div>
+    <a href="sms:7783255428" className="contact-icon-btn" aria-label="Text Next Level Auto Care">
+      💬
+    </a>
+  </div>
+</div>
 
-          <button type="submit" className="btn primary booking-btn">
-            Submit Booking Request
-          </button>
 
           {result && <p className="form-result">{result}</p>}
         </form>
@@ -605,6 +803,7 @@ function Booking() {
     </section>
   );
 }
+
 
 function Contact() {
   return (
@@ -619,9 +818,31 @@ function Contact() {
       <a href="tel:7783255428" className="phone-link">
         778-325-5428
       </a>
+
+      <div className="social-links">
+  <a
+    href="https://www.instagram.com/nextlvlautocare"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Instagram"
+  >
+    <img src="/images/instagram.webp" alt="Instagram" />
+  </a>
+
+  <a
+    href="https://www.tiktok.com/@nextlvlautocare"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="TikTok"
+  >
+    <img src="/images/tiktok.webp" alt="TikTok" />
+  </a>
+</div>
+
     </section>
   );
 }
+
 
 function Footer() {
   return (
