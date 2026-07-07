@@ -786,11 +786,11 @@ function Booking() {
   <p>Prefer talking directly?</p>
 
   <div className="contact-icon-row">
-    <a href="tel:7783255428" className="contact-icon-btn" aria-label="Call Next Level Auto Care">
+    <a href="tel:7783255438" className="contact-icon-btn" aria-label="Call Next Level Auto Care">
       📞
     </a>
 
-    <a href="sms:7783255428" className="contact-icon-btn" aria-label="Text Next Level Auto Care">
+    <a href="sms:7783255438" className="contact-icon-btn" aria-label="Text Next Level Auto Care">
       💬
     </a>
   </div>
@@ -815,8 +815,8 @@ function Contact() {
         or customization.
       </p>
 
-      <a href="tel:7783255428" className="phone-link">
-        778-325-5428
+      <a href="tel:7783255438" className="phone-link">
+        778-325-5438
       </a>
 
       <div className="social-links">
