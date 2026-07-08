@@ -935,9 +935,13 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .slide-image-wrap img {
-    height: 360px;
-  }
+  .slide-image-wrap {
+  aspect-ratio: 4 / 5;
+}
+
+.slide-image-wrap img {
+  height: 100%;
+}
 
   .slide-caption {
     padding: 22px;
@@ -1677,3 +1681,4 @@ footer {
 .addon-items {
   margin-top: 10px;
 }
+

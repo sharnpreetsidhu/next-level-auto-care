@@ -390,32 +390,23 @@ function OurWork() {
   const [isImageOpen, setIsImageOpen] = useState(false);
 
   useEffect(() => {
-  if (isImageOpen) return;
+    if (isImageOpen) return;
 
-  const timer = setInterval(() => {
+    const timer = setInterval(() => {
+      setCurrentImage((previousImage) => (previousImage + 1) % images.length);
+    }, 3500);
+
+    return () => clearInterval(timer);
+  }, [isImageOpen, images.length]);
+
+  function nextSlide() {
     setCurrentImage((previousImage) => (previousImage + 1) % images.length);
-  }, 3500);
-
-  return () => clearInterval(timer);
-}, [isImageOpen, images.length]);
-
-function nextSlide() {
-  setCurrentImage((previousImage) => (previousImage + 1) % images.length);
-}
-
-function previousSlide() {
-  setCurrentImage((previousImage) => (previousImage - 1 + images.length) % images.length);
-}
-
-
-  function nextModalImage(event) {
-    event.stopPropagation();
-    nextSlide();
   }
 
-  function previousModalImage(event) {
-    event.stopPropagation();
-    previousSlide();
+  function previousSlide() {
+    setCurrentImage(
+      (previousImage) => (previousImage - 1 + images.length) % images.length
+    );
   }
 
   return (
@@ -423,43 +414,92 @@ function previousSlide() {
       <p className="eyebrow center">Results Matter</p>
       <h2>Our Work</h2>
       <p className="section-subtitle">
-  View recent detailing, paint correction, ceramic coating, and mobile detailing work.
-</p>
+        View recent detailing, paint correction, ceramic coating, and mobile detailing work.
+      </p>
 
-<div className="gallery-grid reveal">
-  {images.map((image, index) => (
-    <div className="gallery-card" key={index}>
-      <img
-        src={image.src}
-        alt={image.title}
-        onClick={() => {
-          setCurrentImage(index);
-          setIsImageOpen(true);
-        }}
-      />
-    </div>
-  ))}
-</div>
+      <div className="slideshow reveal">
+        <button
+          type="button"
+          className="slide-btn left"
+          onClick={previousSlide}
+          aria-label="Previous image"
+        >
+          ‹
+        </button>
 
-{isImageOpen && (
-  <div className="image-modal" onClick={() => setIsImageOpen(false)}>
-    <button className="close-modal" onClick={() => setIsImageOpen(false)}>
-      ×
-    </button>
+        <div className="slide-image-wrap">
+          <img
+            src={images[currentImage].src}
+            alt={images[currentImage].title}
+            onClick={() => setIsImageOpen(true)}
+          />
+        </div>
 
-    <img
-      src={images[currentImage].src}
-      alt={images[currentImage].title}
-      onClick={(event) => event.stopPropagation()}
-    />
+        <button
+          type="button"
+          className="slide-btn right"
+          onClick={nextSlide}
+          aria-label="Next image"
+        >
+          ›
+        </button>
 
-    <div className="modal-counter">
-      {currentImage + 1} / {images.length}
-    </div>
-  </div>
-)}
-</section>
-);
+        <div className="dots">
+          {images.map((image, index) => (
+            <button
+              type="button"
+              key={image.src}
+              className={currentImage === index ? 'dot active' : 'dot'}
+              onClick={() => setCurrentImage(index)}
+              aria-label={`Go to image ${index + 1}`}
+            ></button>
+          ))}
+        </div>
+      </div>
+
+      {isImageOpen && (
+        <div className="image-modal" onClick={() => setIsImageOpen(false)}>
+          <button className="close-modal" onClick={() => setIsImageOpen(false)}>
+            ×
+          </button>
+
+          <button
+            type="button"
+            className="modal-arrow modal-left"
+            onClick={(event) => {
+              event.stopPropagation();
+              previousSlide();
+            }}
+            aria-label="Previous image"
+          >
+            ‹
+          </button>
+
+          <img
+            src={images[currentImage].src}
+            alt={images[currentImage].title}
+            onClick={(event) => event.stopPropagation()}
+          />
+
+          <button
+            type="button"
+            className="modal-arrow modal-right"
+            onClick={(event) => {
+              event.stopPropagation();
+              nextSlide();
+            }}
+            aria-label="Next image"
+          >
+            ›
+          </button>
+
+          <div className="modal-counter">
+            {currentImage + 1} / {images.length}
+          </div>
+        </div>
+      )}
+    </section>
+  );
 }
 
 
