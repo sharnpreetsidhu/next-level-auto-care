@@ -212,7 +212,6 @@ function Navbar() {
       </button>
 
       <div className={isMenuOpen ? 'nav-links open' : 'nav-links'}>
-        <a href="#services" onClick={closeMenu}>Services</a>
         <a href="#packages" onClick={closeMenu}>Packages</a>
         <a href="#work" onClick={closeMenu}>Our Work</a>
         <a href="#booking" onClick={closeMenu}>Book Now</a>
@@ -334,57 +333,7 @@ function Packages() {
     </section>
   );
 }
-function BeforeAfterSlider() {
-  const [sliderPosition, setSliderPosition] = useState(50);
 
-  return (
-    <div className="before-after-card">
-      <div className="before-after-slider">
-        <img
-  src="/images/porsche-before.png"
-  alt="Before detailing"
-  className="compare-image after-image"
-/>
-
-<img
-  src="/images/porsche-after.jpeg"
-  alt="After detailing"
-  className="compare-image before-image"
-  style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-/>
-
-        <div
-          className="slider-line"
-          style={{ left: `${sliderPosition}%` }}
-        ></div>
-
-    
-
-        <div className="bottom-slider-track">
-          <div
-            className="bottom-slider-fill"
-            style={{ width: `${sliderPosition}%` }}
-          ></div>
-
-          <div
-            className="bottom-slider-handle"
-            style={{ left: `${sliderPosition}%` }}
-          ></div>
-        </div>
-
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={sliderPosition}
-          onChange={(event) => setSliderPosition(event.target.value)}
-          className="slider-input"
-          aria-label="Before and after image slider"
-        />
-      </div>
-    </div>
-  );
-}
 
 function OurWork() {
   const images = [
@@ -462,73 +411,41 @@ function previousSlide() {
   View recent detailing, paint correction, ceramic coating, and mobile detailing work.
 </p>
 
-<BeforeAfterSlider />
+<div className="gallery-grid reveal">
+  {images.map((image, index) => (
+    <div className="gallery-card" key={index}>
+      <img
+        src={image.src}
+        alt={image.title}
+        onClick={() => {
+          setCurrentImage(index);
+          setIsImageOpen(true);
+        }}
+      />
+    </div>
+  ))}
+</div>
 
-<div className="slideshow reveal">
+{isImageOpen && (
+  <div className="image-modal" onClick={() => setIsImageOpen(false)}>
+    <button className="close-modal" onClick={() => setIsImageOpen(false)}>
+      ×
+    </button>
 
-        <button className="slide-btn left" onClick={previousSlide}>
-          ‹
-        </button>
+    <img
+      src={images[currentImage].src}
+      alt={images[currentImage].title}
+      onClick={(event) => event.stopPropagation()}
+    />
 
-        <div className="slide-image-wrap">
-          <img
-            src={images[currentImage].src}
-            alt={images[currentImage].title}
-            onClick={() => setIsImageOpen(true)}
-            className="clickable-slide"
-          />
-
-          <div className="slide-caption">
-            <p>
-              {currentImage + 1} / {images.length}
-            </p>
-          </div>
-        </div>
-
-        <button className="slide-btn right" onClick={nextSlide}>
-          ›
-        </button>
-      </div>
-
-      <div className="dots">
-        {images.map((image, index) => (
-          <button
-            key={index}
-            className={currentImage === index ? 'dot active' : 'dot'}
-            onClick={() => setCurrentImage(index)}
-          ></button>
-        ))}
-      </div>
-
-      {isImageOpen && (
-        <div className="image-modal" onClick={() => setIsImageOpen(false)}>
-          <button className="close-modal" onClick={() => setIsImageOpen(false)}>
-            ×
-          </button>
-
-          <button className="modal-arrow modal-left" onClick={previousModalImage}>
-            ‹
-          </button>
-
-          <img
-            src={images[currentImage].src}
-            alt={images[currentImage].title}
-            onClick={(event) => event.stopPropagation()}
-          />
-
-          <button className="modal-arrow modal-right" onClick={nextModalImage}>
-            ›
-          </button>
-
-          <div className="modal-counter">
-            {currentImage + 1} / {images.length}
-          </div>
-        </div>
-      )}
-    </section>
-  );
+    <div className="modal-counter">
+      {currentImage + 1} / {images.length}
+    </div>
+  </div>
+)}
+</section>
+);
 }
-
 
 
 function WhyChooseUs() {
