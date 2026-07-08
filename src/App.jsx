@@ -22,7 +22,6 @@ if (selectedService) {
       <Services setSelectedService={setSelectedService} />
       <Packages />
       <OurWork />
-      <Process />
       <WhyChooseUs />
       <Booking />
       <Contact />
@@ -476,36 +475,45 @@ function Services({ setSelectedService }) {
 function Packages() {
  const packages = [
   {
-    name: 'Express Detail',
+    name: ' Maintenance Detail',
     price: 'Starting at $100',
-    description: 'A quick inside-and-out refresh for vehicles that need a clean, simple reset.',
+    description: 'A inside-and-out refresh for vehicles that need a clean, simple reset.',
     items: [
       'Exterior hand wash',
       'Interior wipe down',
-      'Light vacuum',
+      'Vacuum',
       'Windows cleaned',
+      'Door Jams',
+      'Wheels and wheel-wells',
     ],
   },
   {
-    name: 'Next Level Detail',
-    price: 'Starting at $130',
+    name: 'Deap Clean',
+    price: 'Starting at $220',
     description: 'A deeper inside-and-out detail for a cleaner, sharper finished look.',
     items: [
-      'Deep interior clean',
-      'Foam wash',
-      'Wheels and tires cleaned',
-      'Paint decontamination',
+      'Deep exterior wash',
+      'Enhanced Foam Wash',
+      'Steam clean and shampoo',
+      'Spray wax',
+      'Wheels and Tires',
+      'Plus everything from maintenance'
+      
+
     ],
   },
   {
-    name: 'Paint Correction',
-    price: 'Quote Required',
+    name: 'Ceramic Coating',
+    price: 'Starting at $699',
     description: 'Best for restoring gloss, shine, and clarity to your paint.',
     items: [
-      'Paint correction options',
-      'Swirl mark reduction',
-      'Gloss enhancement',
-      'Ceramic coating available',
+      'Add ons:',
+      'Wheel Coating',
+      'Window Coating',
+      'Interior Coating',
+      'Trim Coating',
+      'Optional 2-step paint correction',
+      
     ],
   },
 ];
@@ -731,35 +739,7 @@ function previousSlide() {
   );
 }
 
-function Process() {
-  return (
-    <section className="process-section reveal">
-      <p className="eyebrow center">How It Works</p>
-      <h2>Simple Booking Process</h2>
 
-      <div className="process-grid">
-  <div className="reveal">
-    <span>01</span>
-    <h3>Call or Text</h3>
-    <p>Tell us what vehicle you have and what service you need.</p>
-  </div>
-
-  <div className="reveal">
-    <span>02</span>
-    <h3>Get a Quote</h3>
-    <p>We recommend the right detail or protection package.</p>
-  </div>
-
-  <div className="reveal">
-    <span>03</span>
-    <h3>We Come To You</h3>
-    <p>Your vehicle gets detailed at your home, workplace, or location.</p>
-  </div>
-</div>
-
-    </section>
-  );
-}
 
 function WhyChooseUs() {
   return (
