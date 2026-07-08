@@ -1311,3 +1311,262 @@ footer {
   object-fit: contain;
   display: block;
 }
+
+.service-clickable {
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.service-clickable:hover {
+  transform: translateY(-6px);
+  border-color: rgba(207, 177, 43, 0.55);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
+}
+
+.service-detail-page {
+  min-height: 100vh;
+  background: #050505;
+  color: #ffffff;
+  padding: 38px 8%;
+}
+
+.back-button {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #141414;
+  color: #ffffff;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-bottom: 60px;
+}
+
+.back-button:hover {
+  background: #cfb12b;
+  color: #000000;
+}
+
+.service-detail-hero {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 60px;
+}
+
+.service-detail-hero h1 {
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.95;
+  margin: 16px 0;
+}
+
+.service-detail-hero p {
+  color: #cfcfcf;
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+.service-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto 55px;
+}
+
+.detail-panel,
+.price-note-box {
+  background: #151515;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  padding: 28px;
+}
+
+.detail-panel h3,
+.price-note-box h3 {
+  color: #cfb12b;
+  margin-bottom: 16px;
+  font-size: 1.35rem;
+}
+
+.detail-panel ul,
+.price-note-box ul {
+  padding-left: 22px;
+  color: #e8e8e8;
+  line-height: 1.8;
+}
+
+.detail-section {
+  max-width: 1100px;
+  margin: 0 auto 55px;
+}
+
+.detail-section h2 {
+  color: #cfb12b;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.detail-section p {
+  color: #d8d8d8;
+  margin-bottom: 24px;
+}
+
+.pricing-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.mini-price-card {
+  background: #151515;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.mini-price-card span {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.mini-price-card strong {
+  color: #cfb12b;
+  white-space: nowrap;
+}
+
+.addon-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.addon-row {
+  background: #151515;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.addon-row strong {
+  color: #cfb12b;
+}
+
+.price-note-box {
+  max-width: 1100px;
+  margin: 0 auto 40px;
+}
+
+.quote-button {
+  display: inline-flex;
+  margin-top: 18px;
+  background: #cfb12b;
+  color: #000000;
+  text-decoration: none;
+  padding: 14px 26px;
+  border-radius: 8px;
+  font-weight: 900;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+@media (max-width: 800px) {
+  .service-detail-page {
+    padding: 28px 5%;
+  }
+
+  .service-detail-grid,
+  .pricing-card-grid,
+  .addon-list {
+    grid-template-columns: 1fr;
+  }
+
+  .service-detail-hero {
+    margin-bottom: 40px;
+  }
+
+  .back-button {
+    margin-bottom: 40px;
+  }
+}
+
+.service-clickable {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  appearance: none;
+  border: 1px solid #262626;
+}
+
+.service-card-cta {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: 24px;
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+  padding-bottom: 3px;
+  opacity: 0.9;
+  transition: 0.2s ease;
+}
+
+.service-clickable:hover .service-card-cta {
+  color: #d4af37;
+  border-color: #d4af37;
+  transform: translateX(5px);
+}
+
+#services .section-subtitle::after {
+  content: ' Click a service to view pricing.';
+  color: #d4af37;
+  font-weight: 800;
+}
+
+.quote-cta-box {
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  background: #151515;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  padding: 28px;
+}
+
+.quote-cta-box h3 {
+  color: #cfb12b;
+  margin-bottom: 10px;
+  font-size: 1.35rem;
+}
+
+.quote-cta-box p {
+  color: #d8d8d8;
+  line-height: 1.6;
+}
+
+.package-price {
+  display: inline-block;
+  color: #d4af37;
+  font-size: 1.15rem;
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+
+.package-note {
+  margin-top: 28px;
+  color: #bdbdbd;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+}

@@ -4,12 +4,22 @@ import './App.css';
 
 
 function App() {
+  const [selectedService, setSelectedService] = useState(null);
+
+if (selectedService) {
+  return (
+    <ServiceDetailPage
+      service={selectedService}
+      onBack={() => setSelectedService(null)}
+    />
+  );
+}
   return (
     <div>
       <ScrollReveal />
       <Navbar />
       <Hero />
-      <Services />
+      <Services setSelectedService={setSelectedService} />
       <Packages />
       <OurWork />
       <Process />
@@ -19,6 +29,110 @@ function App() {
       <Footer />
       <BackToTop />
     </div>
+  );
+}
+
+function ServiceDetailPage({ service, onBack }) {
+  return (
+    <main className="service-detail-page">
+      <button className="back-button" onClick={onBack}>
+        ← Back to Services
+      </button>
+
+      <section className="service-detail-hero">
+        <p className="eyebrow center">Service Details</p>
+        <h1>{service.title}</h1>
+        <p>{service.text}</p>
+      </section>
+
+      <section className="service-detail-grid">
+        <div className="detail-panel">
+          <h3>{service.title} Includes</h3>
+          <ul>
+            {service.includes.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="detail-panel">
+          <h3>Good To Know</h3>
+          <ul>
+            <li>Prices may vary based on vehicle size and condition.</li>
+            <li>Extra charges may apply for heavy dirt, stains, pet hair, or mold.</li>
+            <li>Mobile detailing may include an additional travel fee.</li>
+            <li>Call or text for the most accurate quote.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="detail-section">
+        <h2>Base Pricing</h2>
+        <p>Pricing depends on vehicle type and condition.</p>
+
+        <div className="pricing-card-grid">
+          {service.pricing.map(([label, price]) => (
+            <div className="mini-price-card" key={label}>
+              <span>{label}</span>
+              <strong>{price}</strong>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {service.addons && service.addons.length > 0 && (
+  <section className="detail-section">
+    <h2>Add-On Services</h2>
+    <p>Ask about extras when booking your detail.</p>
+
+    <div className="addon-list">
+      {service.addons.map(([label, price]) => (
+        <div className="addon-row" key={label}>
+          <span>{label}</span>
+          <strong>{price}</strong>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+<>
+  {service.showPriceNote !== false && (
+    <section className="price-note-box">
+      <h3>Prices May Vary Based On:</h3>
+      <ul>
+        <li>Pet hair</li>
+        <li>Sap, moss, or algae on the exterior</li>
+        <li>Mold growth</li>
+        <li>Stains</li>
+        <li>Dirt level and overall vehicle condition</li>
+      </ul>
+    </section>
+  )}
+
+  <section className="quote-cta-box">
+    <h3>Want an exact quote?</h3>
+    <p>
+      Send a quick request and we’ll confirm pricing based on your vehicle and service.
+    </p>
+
+    <button
+      type="button"
+      className="quote-button"
+      onClick={() => {
+        onBack();
+
+        setTimeout(() => {
+          document.getElementById('booking')?.scrollIntoView({
+            behavior: 'smooth',
+          });
+        }, 50);
+      }}
+    >
+      Request a Quote
+    </button>
+  </section>
+</>
+    </main>
   );
 }
 
@@ -149,33 +263,186 @@ function Hero() {
   );
 }
 
-function Services() {
+function Services({ setSelectedService }) {
+
+  const detailingPage = {
+  title: 'Detailing',
+  text: 'Interior, exterior, and full detailing packages for a cleaner, sharper vehicle.',
+  includes: [
+    'Interior cleaning for seats, carpets, mats, plastics, cup holders, and panels',
+    'Exterior hand wash, wheel cleaning, tire dressing, and clean finished look',
+    'Full detail option combining interior and exterior service',
+    'Mobile service available depending on location',
+    'Final walkthrough before completion',
+  ],
+  pricing: [
+    ['Sedan Exterior', '$35'],
+    ['Sedan Interior', '$65'],
+    ['Sedan Full Detail', '$100'],
+
+    ['Midsize SUV Exterior', '$40'],
+    ['Midsize SUV Interior', '$70'],
+    ['Midsize SUV Full Detail', '$110'],
+
+    ['Full Size SUV Exterior', '$45'],
+    ['Full Size SUV Interior', '$75'],
+    ['Full Size SUV Full Detail', '$120'],
+
+    ['Pickup Truck Exterior', '$45'],
+    ['Pickup Truck Interior', '$65'],
+    ['Pickup Truck Full Detail', '$110'],
+  ],
+  addons: [
+    ['Iron Decontamination', '$30'],
+    ['Sealant', '$40'],
+    ['Engine Bay', '$15'],
+    ['Leather Conditioner', '$15'],
+    ['Seat Shampoo / Extraction', '$50'],
+    ['Carpet Shampoo / Extraction', '$50'],
+    ['Leather Shield Interior Coating', '$120'],
+  ],
+};
+
   const services = [
-    {
-      title: 'Ceramic Coating',
-      text: 'Long-lasting paint protection with a glossy finish that helps protect your vehicle and makes future washes easier.',
-    },
-    {
-      title: 'Paint Correction',
-      text: 'Removes swirl marks, light scratches, oxidation, and dullness to restore shine, depth, and clarity.',
-    },
-    {
-      title: 'Interior Detailing',
-      text: 'Deep cleaning for seats, carpets, mats, plastics, cup holders, panels, and high-touch surfaces.',
-    },
-    {
-      title: 'Exterior Detailing',
-      text: 'Foam wash, wheel cleaning, tire dressing, paint decontamination, and a clean finished look.',
-    },
-    {
-      title: 'Mobile Detailing',
-      text: 'We come to your home, workplace, or location so you do not have to waste time waiting at a shop.',
-    },
-    {
-      title: 'Customization',
-      text: 'Finishing touches and appearance upgrades to help your vehicle stand out.',
-    },
-  ];
+ {
+  title: 'Ceramic Coating',
+  text: 'Long-lasting paint protection with a glossy finish that helps protect your vehicle and makes future washes easier.',
+  showPriceNote: false,
+  includes: [
+    'Paint-safe wash and surface prep',
+    'Paint decontamination before coating',
+    'Gloss-enhancing ceramic protection',
+    'Hydrophobic finish for easier maintenance',
+    'Final inspection before pickup or delivery',
+  ],
+  pricing: [
+    ['Sedan', 'Quote Required'],
+    ['SUV / Truck', 'Quote Required'],
+    ['Paint Correction + Ceramic', 'Varies'],
+  ],
+  addons: [
+    ['Iron Decontamination', '$30'],
+    ['Clay Bar Treatment', '$40'],
+    ['Paint Correction Prep', 'Varies'],
+  ],
+},
+  {
+    title: 'Paint Correction',
+    text: 'Removes swirl marks, light scratches, oxidation, and dullness to restore shine, depth, and clarity.',
+    showPriceNote: false,
+    includes: [
+      'Exterior wash and paint decontamination',
+      'Machine polishing where needed',
+      'Swirl mark and light scratch reduction',
+      'Gloss and clarity enhancement',
+      'Protection added after correction',
+    ],
+    pricing: [
+      ['One-Step Correction', 'Quote Required'],
+      ['Multi-Step Correction', 'Quote Required'],
+      ['Correction + Ceramic Coating', 'Varies'],
+    ],
+  
+    addons: [
+    ['Iron Decontamination', '$30'],
+    ['Clay Bar Treatment', '$40'],
+    ['Sealant Protection', '$40'],
+    ['Ceramic Coating', 'Varies'],
+  ],
+
+  },
+  {
+    title: 'Interior Detailing',
+    text: 'Deep cleaning for seats, carpets, mats, plastics, cup holders, panels, and high-touch surfaces.',
+    pageData: detailingPage,
+    
+    includes: [
+      'Dash, trim, vinyl, and door panels cleaned',
+      'Cup holders, crevices, and high-touch areas detailed',
+      'Full interior vacuum',
+      'Seats cleaned',
+      'Mats cleaned and rubber mats washed',
+      'Steam cleaning where applicable',
+    ],
+    pricing: [
+      ['Sedan', '$65'],
+      ['Midsize SUV', '$70'],
+      ['Full Size SUV', '$75'],
+      ['Pickup Truck', '$65'],
+    ],
+    addons: [
+      ['Seat Shampoo / Extraction', '$50'],
+      ['Carpet Shampoo / Extraction', '$50'],
+      ['Leather Conditioner', '$15'],
+      ['Leather Shield Interior Coating', '$120'],
+    ],
+  },
+  {
+    title: 'Exterior Detailing',
+    text: 'Foam wash, wheel cleaning, tire dressing, paint decontamination, and a clean finished look.',
+    pageData: detailingPage,
+    includes: [
+      'Thorough wheel and tire cleaning',
+      'Foam pre-soak followed by a gentle hand wash',
+      'Exterior trim and fuel door cleaned',
+      'Streak-free rinse and dry',
+      'Tires dressed for a bold, refreshed finish',
+    ],
+    pricing: [
+      ['Sedan', '$35'],
+      ['Midsize SUV', '$40'],
+      ['Full Size SUV', '$45'],
+      ['Pickup Truck', '$45'],
+    ],
+    addons: [
+      ['Iron Decontamination', '$30'],
+      ['Sealant Protection', '$40'],
+      ['Engine Bay', '$15'],
+    ],
+  },
+  {
+    title: 'Mobile Detailing',
+    text: 'We come to your home, workplace, or location so you do not have to waste time waiting at a shop.',
+    pageData: detailingPage,
+    includes: [
+      'Mobile service at your preferred location',
+      'Interior and exterior packages available',
+      'Convenient booking by call or text',
+      'Perfect for busy schedules',
+      'Additional travel fee may apply depending on location',
+    ],
+    pricing: [
+      ['Mobile Service Fee', 'Varies'],
+      ['Interior Mobile Detail', 'From $65'],
+      ['Exterior Mobile Detail', 'From $35'],
+      ['Complete Mobile Detail', 'From $100'],
+    ],
+    addons: [
+      ['Pet Hair Removal', 'Varies'],
+      ['Stain Treatment', 'Varies'],
+      ['Seat Shampoo / Extraction', '$50'],
+    ],
+  },
+  {
+
+  title: 'Customization',
+  text: 'Finishing touches and appearance upgrades to help your vehicle stand out.',
+  showPriceNote: false,
+  includes: [
+    'Custom appearance upgrades',
+    'Detail-focused finishing touches',
+    'Exterior styling add-ons',
+    'Interior or exterior custom requests',
+    'Quote based on request and vehicle condition',
+  ],
+  pricing: [
+    ['Basic Customization', 'Quote Required'],
+    ['Appearance Upgrade', 'Quote Required'],
+    ['Custom Package', 'Varies'],
+  ],
+ 
+},
+];
 
   return (
     <section className="section reveal" id="services">
@@ -186,35 +453,62 @@ function Services() {
       </p>
 
       <div className="services-grid">
-        {services.map((service, index) => (
-          <div className="service-card reveal" key={index}>
-            <h3>{service.title}</h3>
-            <p>{service.text}</p>
-          </div>
-        ))}
+       {services.map((service) => (
+<button
+  type="button"
+  className="service-card service-clickable"
+  key={service.title}
+  onClick={() => setSelectedService(service.pageData || service)}
+>
+  <div>
+    <h3>{service.title}</h3>
+    <p>{service.text}</p>
+  </div>
+
+  <span className="service-card-cta">View pricing →</span>
+</button>
+))}
       </div>
     </section>
   );
 }
 
 function Packages() {
-  const packages = [
-    {
-      name: 'Maintenance Detail',
-      description: 'Best for vehicles that need a regular clean and refresh.',
-      items: ['Exterior hand wash', 'Interior wipe down', 'Vacuum', 'Windows cleaned'],
-    },
-    {
-      name: 'Deep Detail',
-      description: 'Best for vehicles that need a full interior and exterior reset.',
-      items: ['Deep interior clean', 'Foam wash', 'Wheels and tires', 'Paint decontamination'],
-    },
-    {
-      name: 'Paint Protection',
-      description: 'Best for gloss, shine, and longer-lasting protection.',
-      items: ['Paint correction options', 'Ceramic coating', 'Gloss enhancement', 'Long-term protection'],
-    },
-  ];
+ const packages = [
+  {
+    name: 'Express Detail',
+    price: 'Starting at $100',
+    description: 'A quick inside-and-out refresh for vehicles that need a clean, simple reset.',
+    items: [
+      'Exterior hand wash',
+      'Interior wipe down',
+      'Light vacuum',
+      'Windows cleaned',
+    ],
+  },
+  {
+    name: 'Next Level Detail',
+    price: 'Starting at $130',
+    description: 'A deeper inside-and-out detail for a cleaner, sharper finished look.',
+    items: [
+      'Deep interior clean',
+      'Foam wash',
+      'Wheels and tires cleaned',
+      'Paint decontamination',
+    ],
+  },
+  {
+    name: 'Paint Correction',
+    price: 'Quote Required',
+    description: 'Best for restoring gloss, shine, and clarity to your paint.',
+    items: [
+      'Paint correction options',
+      'Swirl mark reduction',
+      'Gloss enhancement',
+      'Ceramic coating available',
+    ],
+  },
+];
 
   return (
     <section className="packages-section reveal" id="packages">
@@ -225,9 +519,10 @@ function Packages() {
         {packages.map((pkg, index) => (
           <div className="package-card reveal" key={index}>
             <h3>{pkg.name}</h3>
-            <p>{pkg.description}</p>
+<p>{pkg.description}</p>
+<strong className="package-price">{pkg.price}</strong>
 
-            <ul>
+<ul>
               {pkg.items.map((item, itemIndex) => (
                 <li key={itemIndex}>{item}</li>
               ))}
@@ -235,6 +530,9 @@ function Packages() {
           </div>
         ))}
       </div>
+      <p className="package-note">
+  Prices may vary depending on vehicle size and condition.
+</p>
     </section>
   );
 }
