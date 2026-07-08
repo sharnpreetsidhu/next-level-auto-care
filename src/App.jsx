@@ -291,20 +291,20 @@ function Packages() {
 
     ],
   },
+ 
   {
-    name: 'Ceramic Coating',
-    price: 'Starting at $699',
-    description: 'Best for restoring gloss, shine, and clarity to your paint.',
-    items: [
-      'Add ons:',
-      'Wheel Coating',
-      'Window Coating',
-      'Interior Coating',
-      'Trim Coating',
-      'Optional 2-step paint correction',
-      
-    ],
-  },
+  name: 'Ceramic Coating',
+  price: 'Starting at $699',
+  description: 'Best for restoring gloss, shine, and clarity to your paint.',
+  addOnTitle: 'Add ons:',
+  addOns: [
+    'Wheel Coating',
+    'Window Coating',
+    'Interior Coating',
+    'Trim Coating',
+    'Optional 2-step paint correction',
+  ],
+},
 ];
 
   return (
@@ -319,16 +319,31 @@ function Packages() {
 <p>{pkg.description}</p>
 <strong className="package-price">{pkg.price}</strong>
 
-<ul>
-              {pkg.items.map((item, itemIndex) => (
-                <li key={itemIndex}>{item}</li>
-              ))}
-            </ul>
+{pkg.items && (
+  <ul className="package-items">
+    {pkg.items.map((item, index) => (
+      <li key={index}>{item}</li>
+    ))}
+  </ul>
+)}
+
+
+{pkg.addOns && (
+  <div className="addon-list">
+    <p className="addon-title">{pkg.addOnTitle}</p>
+
+    <ul>
+      {pkg.addOns.map((addon, index) => (
+        <li key={index}>{addon}</li>
+      ))}
+    </ul>
+  </div>
+)}
           </div>
         ))}
       </div>
       <p className="package-note">
-  Prices may vary depending on vehicle size and condition.
+  *Prices may vary depending on vehicle size and condition.
 </p>
     </section>
   );

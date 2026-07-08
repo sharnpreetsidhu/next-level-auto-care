@@ -1618,3 +1618,62 @@ footer {
     object-fit: contain;
   }
 }
+
+.addon-list {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.addon-title {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+
+
+
+.addon-list li {
+  color: #ffffff;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.package-items,
+.addon-items {
+  list-style: none;
+  padding: 0;
+  margin: 22px 0 0;
+}
+
+.package-items li,
+.addon-items li {
+  position: relative;
+  padding: 14px 0 14px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.package-items li::before,
+.addon-items li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #d6b91f;
+  font-weight: 700;
+}
+
+.addon-list {
+  margin-top: 22px;
+}
+
+.addon-title {
+  color: #ffffff;
+  font-weight: 700;
+  margin: 0 0 0;
+}
+
+.addon-items {
+  margin-top: 10px;
+}
