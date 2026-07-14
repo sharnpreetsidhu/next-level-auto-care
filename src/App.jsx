@@ -244,7 +244,7 @@ function Hero() {
             That Comes To You</h1>
           <p>
             Ceramic coating, paint correction, detailing, customization, & more 
-            for drivers who expect uncompromising quality.
+            for drivers who value uncompromising quality.
           </p>
 
           <div className="hero-buttons">
