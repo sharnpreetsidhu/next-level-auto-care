@@ -239,11 +239,12 @@ function Hero() {
 
       <div className="hero-overlay">
         <div className="hero-content">
-          <p className="eyebrow">Mobile Auto Detailing</p>
-          <h1>Premium Detailing That Comes To You</h1>
+          <p className="eyebrow">Profession Auto Detailing</p>
+          <h1>Premium Detailing 
+            That Comes To You</h1>
           <p>
-            Ceramic coating, paint correction, customization, and professional
-            mobile detailing for vehicles that deserve a cleaner, glossier finish.
+            Ceramic coating, paint correction, detailing, customization, & more 
+            for drivers who expect uncompromising quality.
           </p>
 
           <div className="hero-buttons">
@@ -352,69 +353,89 @@ function Packages() {
 
 function OurWork() {
   const images = [
-    {
-      src: '/images/work-1.png',
-      title: 'Auto detailing work 1',
-    },
-    {
-      src: '/images/work-2.png',
-      title: 'Auto detailing work 2',
-    },
-    {
-      src: '/images/work-3.png',
-      title: 'Auto detailing work 3',
-    },
-    {
-      src: '/images/work-4.png',
-      title: 'Auto detailing work 4',
-    },
-    {
-      src: '/images/work-5.png',
-      title: 'Auto detailing work 5',
-    },
-    {
-      src: '/images/work-6.png',
-      title: 'Auto detailing work 6',
-    },
-    {
-      src: '/images/work-7.png',
-      title: 'Auto detailing work 7',
-    },
-    {
-      src: '/images/work-8.png',
-      title: 'Auto detailing work 8',
-    },
+    { src: '/images/work-1.jpg', title: 'Auto detailing work 1' },
+    { src: '/images/work-2.jpg', title: 'Auto detailing work 2' },
+    { src: '/images/work-3.jpg', title: 'Auto detailing work 3' },
+    { src: '/images/work-4.jpg', title: 'Auto detailing work 4' },
+    { src: '/images/work-5.jpg', title: 'Auto detailing work 5' },
+    { src: '/images/work-6.jpg', title: 'Auto detailing work 6' },
+    { src: '/images/work-7.jpg', title: 'Auto detailing work 7' },
+    { src: '/images/work-8.jpg', title: 'Auto detailing work 8' },
+    { src: '/images/work-9.jpg', title: 'Auto detailing work 9' },
+    { src: '/images/work-10.jpg', title: 'Auto detailing work 10' },
+    { src: '/images/work-11.jpg', title: 'Auto detailing work 11' },
+    { src: '/images/work-12.jpg', title: 'Auto detailing work 12' },
+    { src: '/images/work-13.jpg', title: 'Auto detailing work 13' },
+    { src: '/images/work-14.jpg', title: 'Auto detailing work 14' },
+    { src: '/images/work-15.jpg', title: 'Auto detailing work 15' },
+    { src: '/images/work-16.jpg', title: 'Auto detailing work 16' },
+    { src: '/images/work-17.jpg', title: 'Auto detailing work 17' },
+    { src: '/images/work-18.jpg', title: 'Auto detailing work 18' },
+    { src: '/images/work-19.jpg', title: 'Auto detailing work 19' },
+    { src: '/images/work-20.jpg', title: 'Auto detailing work 20' },
+    { src: '/images/work-21.jpg', title: 'Auto detailing work 21' },
+    { src: '/images/work-22.jpg', title: 'Auto detailing work 22' },
+    { src: '/images/work-23.jpg', title: 'Auto detailing work 23' },
+    { src: '/images/work-24.jpg', title: 'Auto detailing work 24' },
+    { src: '/images/work-25.jpg', title: 'Auto detailing work 25' },
+    { src: '/images/work-26.jpg', title: 'Auto detailing work 26' },
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
   const [isImageOpen, setIsImageOpen] = useState(false);
 
+  // Automatically changes the image every 3.5 seconds.
   useEffect(() => {
-    if (isImageOpen) return;
+    if (isImageOpen) return undefined;
 
     const timer = setInterval(() => {
-      setCurrentImage((previousImage) => (previousImage + 1) % images.length);
+      setCurrentImage(
+        (previousImage) => (previousImage + 1) % images.length
+      );
     }, 3500);
 
     return () => clearInterval(timer);
   }, [isImageOpen, images.length]);
 
+  // Preloads the next and previous images.
+  useEffect(() => {
+    const nextIndex = (currentImage + 1) % images.length;
+    const previousIndex =
+      (currentImage - 1 + images.length) % images.length;
+
+    const nextImage = new Image();
+    const previousImage = new Image();
+
+    nextImage.src = images[nextIndex].src;
+    previousImage.src = images[previousIndex].src;
+  }, [currentImage, images.length]);
+
   function nextSlide() {
-    setCurrentImage((previousImage) => (previousImage + 1) % images.length);
+    setCurrentImage(
+      (previousImage) => (previousImage + 1) % images.length
+    );
   }
 
   function previousSlide() {
     setCurrentImage(
-      (previousImage) => (previousImage - 1 + images.length) % images.length
+      (previousImage) =>
+        (previousImage - 1 + images.length) % images.length
     );
+  }
+
+  function selectImage(index) {
+    setCurrentImage(index);
   }
 
   return (
     <section className="section work-section reveal" id="work">
       <p className="eyebrow center">Results Matter</p>
+
       <h2>Our Work</h2>
+
       <p className="section-subtitle">
-        View recent detailing, paint correction, ceramic coating, and mobile detailing work.
+        View recent detailing, paint correction, ceramic coating, and mobile
+        detailing work.
       </p>
 
       <div className="slideshow reveal">
@@ -431,6 +452,8 @@ function OurWork() {
           <img
             src={images[currentImage].src}
             alt={images[currentImage].title}
+            loading="eager"
+            decoding="async"
             onClick={() => setIsImageOpen(true)}
           />
         </div>
@@ -450,16 +473,27 @@ function OurWork() {
               type="button"
               key={image.src}
               className={currentImage === index ? 'dot active' : 'dot'}
-              onClick={() => setCurrentImage(index)}
+              onClick={() => selectImage(index)}
               aria-label={`Go to image ${index + 1}`}
-            ></button>
+            />
           ))}
         </div>
       </div>
 
       {isImageOpen && (
-        <div className="image-modal" onClick={() => setIsImageOpen(false)}>
-          <button className="close-modal" onClick={() => setIsImageOpen(false)}>
+        <div
+          className="image-modal"
+          onClick={() => setIsImageOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Expanded gallery image"
+        >
+          <button
+            type="button"
+            className="close-modal"
+            onClick={() => setIsImageOpen(false)}
+            aria-label="Close image"
+          >
             ×
           </button>
 
@@ -478,6 +512,8 @@ function OurWork() {
           <img
             src={images[currentImage].src}
             alt={images[currentImage].title}
+            loading="eager"
+            decoding="async"
             onClick={(event) => event.stopPropagation()}
           />
 
@@ -501,7 +537,6 @@ function OurWork() {
     </section>
   );
 }
-
 
 function WhyChooseUs() {
   return (

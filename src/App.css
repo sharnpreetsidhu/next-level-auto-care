@@ -1682,3 +1682,17 @@ footer {
   margin-top: 10px;
 }
 
+.package-list.bullet-only li::before {
+  content: '•';
+  color: #d4af24;
+}
+
+.package-list.bullet-only li {
+  padding-left: 24px;
+}
+
+.add-ons-label {
+  margin: 0 0 8px;
+  font-weight: 700;
+  color: #b8b8b8;
+}
