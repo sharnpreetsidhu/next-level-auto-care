@@ -239,7 +239,7 @@ function Hero() {
 
       <div className="hero-overlay">
         <div className="hero-content">
-          <p className="eyebrow">Profession Auto Detailing</p>
+          <p className="eyebrow">Professional Auto Detailing</p>
           <h1>Premium Detailing 
             That Comes To You</h1>
           <p>
