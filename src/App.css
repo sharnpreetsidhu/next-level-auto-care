@@ -1818,3 +1818,133 @@ footer {
   line-height: 1;
   display: block;
 }
+
+/* Keep spray visible outside the gold circle */
+.back-to-top {
+  overflow: visible;
+  isolation: isolate;
+}
+
+.back-to-top img {
+  transform-origin: 35% 75%;
+  transition: transform 250ms ease;
+}
+
+.back-to-top:hover img,
+.back-to-top:focus-visible img {
+  transform: translateY(-2px) rotate(-12deg);
+}
+
+.back-to-top.is-spraying img {
+  animation: washer-kick 350ms ease;
+}
+
+/* Spray starts near the upward-facing nozzle */
+.washer-spray {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.washer-spray span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  height: 18px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to top,
+    rgba(190, 225, 255, 0.2),
+    #eaf7ff
+  );
+  opacity: 0;
+  transform-origin: bottom center;
+}
+
+.washer-spray span:nth-child(1) {
+  --spray-x: -22px;
+  --spray-y: -80px;
+  --spray-angle: -16deg;
+  --spray-delay: 0ms;
+}
+
+.washer-spray span:nth-child(2) {
+  --spray-x: -10px;
+  --spray-y: -110px;
+  --spray-angle: -7deg;
+  --spray-delay: 45ms;
+}
+
+.washer-spray span:nth-child(3) {
+  --spray-x: 2px;
+  --spray-y: -125px;
+  --spray-angle: 2deg;
+  --spray-delay: 20ms;
+}
+
+.washer-spray span:nth-child(4) {
+  --spray-x: 17px;
+  --spray-y: -105px;
+  --spray-angle: 12deg;
+  --spray-delay: 70ms;
+}
+
+.washer-spray span:nth-child(5) {
+  --spray-x: 28px;
+  --spray-y: -75px;
+  --spray-angle: 22deg;
+  --spray-delay: 35ms;
+}
+
+.back-to-top.is-spraying .washer-spray span {
+  animation: water-spray 550ms ease-out both;
+  animation-delay: var(--spray-delay);
+}
+
+@keyframes water-spray {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0)
+      rotate(var(--spray-angle)) scaleY(0.3);
+  }
+
+  15% {
+    opacity: 0.95;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(var(--spray-x), var(--spray-y))
+      rotate(var(--spray-angle)) scaleY(0.6);
+  }
+}
+
+@keyframes washer-kick {
+  0%, 100% {
+    transform: translateY(-2px) rotate(-12deg);
+  }
+
+  40% {
+    transform: translateY(1px) rotate(-5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top img {
+    animation: none;
+    transition: none;
+  }
+
+  .back-to-top:hover img,
+  .back-to-top:focus-visible img {
+    transform: none;
+  }
+
+  .washer-spray {
+    display: none;
+  }
+}

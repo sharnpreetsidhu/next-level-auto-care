@@ -136,54 +136,81 @@ function ServiceDetailPage({ service, onBack }) {
 
 function BackToTop() {
   const [showButton, setShowButton] = useState(false);
+  const [isSpraying, setIsSpraying] = useState(false);
 
   useEffect(() => {
     function handleScroll() {
       setShowButton(window.scrollY > 500);
     }
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-return (
-  <button
-    type="button"
-    className={showButton ? 'back-to-top show' : 'back-to-top'}
-    onClick={() => {
-      const reduceMotion = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-      ).matches;
+  useEffect(() => {
+    if (!isSpraying) return;
 
-      window.scrollTo({
-        top: 0,
-        behavior: reduceMotion ? 'auto' : 'smooth',
-      });
-    }}
-    aria-label="Back to top"
-    title="Back to top"
-  >
-    <svg
-      className="back-to-top-chevron"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
+    const timer = window.setTimeout(() => {
+      setIsSpraying(false);
+    }, 700);
+
+    return () => window.clearTimeout(timer);
+  }, [isSpraying]);
+
+  function handleClick() {
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    if (!reduceMotion) {
+      setIsSpraying(true);
+    }
+
+    window.scrollTo({
+      top: 0,
+      behavior: reduceMotion ? 'auto' : 'smooth',
+    });
+  }
+
+  return (
+    <button
+      type="button"
+      className={[
+        'back-to-top',
+        showButton || isSpraying ? 'show' : '',
+        isSpraying ? 'is-spraying' : '',
+      ].filter(Boolean).join(' ')}
+      onClick={handleClick}
+      aria-label="Back to top"
+      title="Back to top"
     >
-      <path d="m7 14 5-5 5 5" />
-    </svg>
+      <span className="washer-spray" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+      </span>
 
-    <img src="/images/pressure-washer.png" alt="" />
-  </button>
-);
+      <svg
+        className="back-to-top-chevron"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="m7 14 5-5 5 5" />
+      </svg>
+
+      <img src="/images/pressure-washer.png" alt="" />
+    </button>
+  );
 }
-
 
 
 function ScrollReveal() {
