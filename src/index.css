@@ -435,4 +435,21 @@ textarea {
   }
 }
 
+/* Keep the original booking style, refine alignment */
+#booking .booking-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+#booking .booking-step-form {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin: 32px auto 0;
+  padding: clamp(24px, 4vw, 36px);
+  border: 1px solid #262626;
+  box-shadow: none;
+}
 
