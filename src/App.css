@@ -2017,7 +2017,7 @@ h3 {
   }
 
   .nav-links a[href="#booking"] {
-    justify-content: center;
+    justify-content: flex-start;
   }
 }
 
