@@ -2868,3 +2868,690 @@ h3 {
     width: 65%;
   }
 }
+
+/* ==========================================================
+   NEXT LEVEL AUTO CARE — FINAL DESIGN POLISH
+   No layout redesign. Subtle refinement only.
+========================================================== */
+
+:root {
+  --nl-gold: #d4af37;
+  --nl-white: #ffffff;
+
+  --nl-text-strong: rgba(255, 255, 255, 0.88);
+  --nl-text: rgba(255, 255, 255, 0.62);
+  --nl-text-muted: rgba(255, 255, 255, 0.44);
+  --nl-text-faint: rgba(255, 255, 255, 0.28);
+
+  --nl-border: rgba(255, 255, 255, 0.09);
+  --nl-border-hover: rgba(212, 175, 55, 0.34);
+
+  --nl-card: #151515;
+}
+
+
+/* ==========================================================
+   NAVBAR
+========================================================== */
+
+.navbar {
+  background: rgba(5, 5, 5, 0.56);
+
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+
+  border-bottom: 1px solid transparent;
+
+  transition:
+    background 280ms ease,
+    backdrop-filter 280ms ease,
+    border-color 280ms ease,
+    box-shadow 280ms ease;
+}
+
+.navbar.navbar-scrolled {
+  background: rgba(5, 5, 5, 0.88);
+
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+
+  box-shadow:
+    0 8px 35px rgba(0, 0, 0, 0.16);
+}
+
+
+/* nav links */
+
+.nav-links a:not([href="#booking"]) {
+  color: rgba(255, 255, 255, 0.78);
+
+  transition:
+    color 180ms ease,
+    opacity 180ms ease;
+}
+
+.nav-links a:not([href="#booking"]):hover {
+  color: #ffffff;
+}
+
+
+/* ==========================================================
+   GLOBAL TYPOGRAPHY
+========================================================== */
+
+.eyebrow {
+  color: var(--nl-gold);
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+
+  margin-bottom: 13px;
+}
+
+h1,
+h2 {
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  line-height: 1.05;
+}
+
+h3 {
+  letter-spacing: -0.025em;
+}
+
+.section-subtitle {
+  color: var(--nl-text-muted);
+
+  line-height: 1.75;
+}
+
+
+/* ==========================================================
+   SECTION SPACING
+========================================================== */
+
+.section,
+.packages-section,
+.why-section,
+.booking-section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.contact-section {
+  padding-top: 95px;
+  padding-bottom: 95px;
+}
+
+
+/* ==========================================================
+   SUBTLE SECTION DIVIDERS
+========================================================== */
+
+.packages-section,
+.work-section,
+.why-section,
+.booking-section,
+.contact-section {
+  position: relative;
+}
+
+.packages-section::before,
+.work-section::before,
+.why-section::before,
+.booking-section::before,
+.contact-section::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: min(76%, 1050px);
+  height: 1px;
+
+  transform: translateX(-50%);
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.045),
+    rgba(212, 175, 55, 0.13),
+    rgba(255, 255, 255, 0.045),
+    transparent
+  );
+
+  pointer-events: none;
+}
+
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.btn,
+.phone-link,
+.booking-btn,
+.quote-button {
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease;
+}
+
+.primary,
+.phone-link {
+  background: linear-gradient(
+    180deg,
+    #ddbd4b 0%,
+    #d4af37 55%,
+    #cba52f 100%
+  );
+}
+
+.btn:hover,
+.phone-link:hover,
+.quote-button:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active,
+.phone-link:active,
+.quote-button:active,
+.choice-card:active,
+.contact-icon-btn:active {
+  transform: scale(0.98);
+}
+
+
+/* keyboard accessibility without ugly mouse outlines */
+
+.btn:focus-visible,
+.nav-links a:focus-visible,
+.choice-card:focus-visible,
+.contact-icon-btn:focus-visible,
+.slide-btn:focus-visible {
+  outline: 2px solid rgba(212, 175, 55, 0.8);
+  outline-offset: 4px;
+}
+
+
+/* ==========================================================
+   PACKAGE CARDS
+========================================================== */
+
+.package-card {
+  border-color: var(--nl-border);
+
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 300ms ease,
+    background 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.package-card:hover {
+  transform: translateY(-4px);
+
+  border-color: var(--nl-border-hover);
+
+  background: #171717;
+
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.28),
+    0 0 24px rgba(212, 175, 55, 0.035);
+}
+
+.package-card p {
+  color: var(--nl-text-muted);
+}
+
+.package-price {
+  color: var(--nl-gold);
+}
+
+
+/* ==========================================================
+   WHY US — SAME DESIGN, JUST CLEANER
+========================================================== */
+
+.why-points {
+  gap: 20px;
+}
+
+.why-points div {
+  border-color: var(--nl-border);
+
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 300ms ease,
+    background 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.why-points div:hover {
+  transform: translateY(-4px);
+
+  border-color: var(--nl-border-hover);
+
+  background: #171717;
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.25);
+}
+
+.why-points h3 {
+  color: var(--nl-gold);
+}
+
+.why-points p,
+.why-content > p {
+  color: var(--nl-text-muted);
+}
+
+
+/* ==========================================================
+   GALLERY
+========================================================== */
+
+.slide-image-wrap {
+  box-shadow:
+    0 24px 65px rgba(0, 0, 0, 0.26);
+}
+
+.slide-image-wrap img {
+  transition:
+    opacity 300ms ease,
+    transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* quieter arrows */
+
+.slide-btn {
+  width: 40px !important;
+  height: 40px !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+
+  background: rgba(0, 0, 0, 0.30) !important;
+
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+
+  color: rgba(255, 255, 255, 0.82) !important;
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.16) !important;
+
+  opacity: 0.78;
+
+  animation: none !important;
+
+  transition:
+    opacity 180ms ease,
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease !important;
+}
+
+.slide-btn:hover {
+  opacity: 1;
+
+  color: var(--nl-gold) !important;
+
+  background: rgba(0, 0, 0, 0.62) !important;
+
+  border-color: rgba(212, 175, 55, 0.38) !important;
+}
+
+
+/* counter */
+
+.gallery-counter {
+  margin-top: 16px;
+
+  gap: 9px;
+
+  color: var(--nl-text-faint);
+
+  font-size: 0.68rem;
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+}
+
+.gallery-counter span:first-child {
+  color: rgba(212, 175, 55, 0.88);
+}
+
+.gallery-counter-line {
+  width: 24px;
+
+  background: rgba(255, 255, 255, 0.16);
+}
+
+
+/* ==========================================================
+   BOOKING FORM
+========================================================== */
+
+.booking-form {
+  border-color: var(--nl-border);
+
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.28);
+}
+
+
+/* progress */
+
+.step-progress {
+  height: 6px;
+
+  border-color: rgba(255, 255, 255, 0.07);
+
+  background: #080808;
+}
+
+.step-progress span {
+  background: linear-gradient(
+    90deg,
+    #cda832,
+    #d4af37,
+    #e0c04f
+  );
+
+  transition:
+    width 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* choices */
+
+.choice-card {
+  border-color: rgba(255, 255, 255, 0.09);
+
+  background: #0c0c0c;
+
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    background 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.choice-card:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(212, 175, 55, 0.30);
+
+  background: #101010;
+}
+
+.choice-card.selected {
+  transform: none;
+
+  border-color: rgba(212, 175, 55, 0.65);
+
+  background: rgba(212, 175, 55, 0.07);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(212, 175, 55, 0.04);
+}
+
+
+/* booking fields */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  border-color: rgba(255, 255, 255, 0.09);
+
+  background: #0a0a0a;
+
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: rgba(212, 175, 55, 0.70);
+
+  background: #0c0c0c;
+
+  box-shadow:
+    0 0 0 3px rgba(212, 175, 55, 0.06);
+}
+
+
+/* booking page transition */
+
+.step-screen {
+  animation:
+    refinedStepFade 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes refinedStepFade {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ==========================================================
+   CONTACT ICONS
+========================================================== */
+
+.contact-icon-btn {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.contact-icon-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ==========================================================
+   INSTAGRAM LINK
+========================================================== */
+
+.instagram-link {
+  color: var(--nl-text-muted);
+}
+
+.instagram-link:hover {
+  color: var(--nl-gold);
+}
+
+
+/* ==========================================================
+   SCROLL REVEALS
+========================================================== */
+
+.reveal {
+  opacity: 0;
+
+  transform: translateY(16px);
+
+  transition:
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* slight stagger inside grids */
+
+.packages-grid .reveal:nth-child(2),
+.why-points .reveal:nth-child(2) {
+  transition-delay: 60ms;
+}
+
+.packages-grid .reveal:nth-child(3),
+.why-points .reveal:nth-child(3) {
+  transition-delay: 120ms;
+}
+
+
+/* ==========================================================
+   PRESSURE WASHER
+========================================================== */
+
+.back-to-top {
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.30);
+
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.back-to-top:hover {
+  box-shadow:
+    0 13px 34px rgba(0, 0, 0, 0.36),
+    0 0 18px rgba(212, 175, 55, 0.10);
+}
+
+
+/* ==========================================================
+   MOBILE POLISH
+========================================================== */
+
+@media (max-width: 900px) {
+
+  .navbar {
+    background: rgba(5, 5, 5, 0.80);
+  }
+
+  .navbar.navbar-scrolled {
+    background: rgba(5, 5, 5, 0.94);
+  }
+
+  .section,
+  .packages-section,
+  .why-section,
+  .booking-section,
+  .contact-section {
+    padding-top: 76px;
+    padding-bottom: 76px;
+  }
+
+  .packages-grid,
+  .why-points {
+    gap: 16px;
+  }
+
+  .package-card:hover,
+  .why-points div:hover {
+    transform: none;
+  }
+
+  .slide-btn {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .booking-form {
+    box-shadow:
+      0 18px 50px rgba(0, 0, 0, 0.24);
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .hero-content h1 {
+    line-height: 1.02;
+  }
+
+  .hero-content p {
+    line-height: 1.65;
+  }
+
+  .eyebrow {
+    font-size: 0.68rem;
+  }
+
+  .package-card {
+    padding: 28px 22px;
+  }
+
+  .why-points div {
+    padding: 24px;
+  }
+
+  .booking-form {
+    padding: 24px 18px;
+  }
+
+  .choice-card {
+    min-height: 64px;
+  }
+
+  .gallery-counter {
+    margin-top: 14px;
+  }
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .reveal,
+  .step-screen,
+  .package-card,
+  .why-points div,
+  .choice-card,
+  .btn,
+  .slide-btn,
+  .navbar {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

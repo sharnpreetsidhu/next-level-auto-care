@@ -5,6 +5,34 @@ import './App.css';
 
 function App() {
   const [selectedService, setSelectedService] = useState(null);
+  useEffect(() => {
+  function handlePointerMove(event) {
+    const card = event.target.closest(
+      '.package-card, .why-points > div'
+    );
+
+    if (!card) return;
+
+    const rect = card.getBoundingClientRect();
+
+    card.style.setProperty(
+      '--mouse-x',
+      `${event.clientX - rect.left}px`
+    );
+
+    card.style.setProperty(
+      '--mouse-y',
+      `${event.clientY - rect.top}px`
+    );
+  }
+
+  document.addEventListener('pointermove', handlePointerMove);
+
+  return () => {
+    document.removeEventListener('pointermove', handlePointerMove);
+  };
+}, []);
+
 
 if (selectedService) {
   return (
@@ -242,18 +270,53 @@ function ScrollReveal() {
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+
+  useEffect(() => {
+    function handleScroll() {
+      setIsScrolled(window.scrollY > 30);
+
+      const sections = ['packages', 'work', 'booking', 'contact'];
+
+      let current = '';
+
+      sections.forEach((id) => {
+        const section = document.getElementById(id);
+
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= 180 && rect.bottom >= 180) {
+          current = id;
+        }
+      });
+
+      setActiveSection(current);
+    }
+
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, {
+      passive: true,
+    });
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   function closeMenu() {
     setIsMenuOpen(false);
   }
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
       <a href="#" className="logo-wrap" onClick={closeMenu}>
         <img
-  src="/images/next-level-logo-circle.png"
-  alt="Next Level Auto Care logo"
-/>
+          src="/images/next-level-logo-circle.png"
+          alt="Next Level Auto Care logo"
+        />
+
         <span>Next Level Auto Care</span>
       </a>
 
@@ -261,6 +324,7 @@ function Navbar() {
         className={isMenuOpen ? 'menu-toggle active' : 'menu-toggle'}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         aria-label="Toggle navigation menu"
+        aria-expanded={isMenuOpen}
       >
         <span></span>
         <span></span>
@@ -268,10 +332,37 @@ function Navbar() {
       </button>
 
       <div className={isMenuOpen ? 'nav-links open' : 'nav-links'}>
-        <a href="#packages" onClick={closeMenu}>Packages</a>
-        <a href="#work" onClick={closeMenu}>Our Work</a>
-        <a href="#booking" onClick={closeMenu}>Book Now</a>
-        <a href="#contact" onClick={closeMenu}>Contact</a>
+        <a
+          href="#packages"
+          className={activeSection === 'packages' ? 'active' : ''}
+          onClick={closeMenu}
+        >
+          Packages
+        </a>
+
+        <a
+          href="#work"
+          className={activeSection === 'work' ? 'active' : ''}
+          onClick={closeMenu}
+        >
+          Our Work
+        </a>
+
+        <a
+          href="#booking"
+          className={activeSection === 'booking' ? 'active' : ''}
+          onClick={closeMenu}
+        >
+          Book Now
+        </a>
+
+        <a
+          href="#contact"
+          className={activeSection === 'contact' ? 'active' : ''}
+          onClick={closeMenu}
+        >
+          Contact
+        </a>
       </div>
     </nav>
   );
@@ -505,15 +596,17 @@ function OurWork() {
         </button>
 
         <div className="slide-image-wrap">
-          <img
+
+       <img
   key={currentImage}
-  className="slide-image-fade"
+  className="slide-image-fade gallery-active-image"
   src={images[currentImage].src}
   alt={images[currentImage].title}
   loading="eager"
   decoding="async"
   onClick={() => setIsImageOpen(true)}
 />
+   
 
         </div>
 
