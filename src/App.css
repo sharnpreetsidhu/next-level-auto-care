@@ -2020,3 +2020,32 @@ h3 {
     justify-content: center;
   }
 }
+
+.nav-links a[href="#booking"] {
+  padding: 9px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Slightly smaller typography */
+.logo-wrap span {
+  font-size: 1rem;
+}
+
+.nav-links a {
+  font-size: 0.85rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+@media (max-width: 900px) {
+  .logo-wrap span {
+    font-size: 0.9rem;
+  }
+}
