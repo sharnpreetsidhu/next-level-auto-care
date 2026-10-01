@@ -528,9 +528,21 @@ function OurWork() {
 
      <div className="gallery-counter">
   <span>{String(currentImage + 1).padStart(2, '0')}</span>
+
   <span className="gallery-counter-line"></span>
+
   <span>{String(images.length).padStart(2, '0')}</span>
+
+  <button
+    type="button"
+    className="gallery-counter-arrow"
+    onClick={nextSlide}
+    aria-label="Next image"
+  >
+    →
+  </button>
 </div>
+
 
       </div>
 
@@ -993,13 +1005,17 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer>
+    <footer className="minimal-footer">
+      <div className="footer-accent"></div>
+
       <p>© 2026 Next Level Auto Care. All rights reserved.</p>
+
       <p className="made-by">
         Website by <span>Pacific Tech Solutions</span>
       </p>
     </footer>
   );
 }
+
 
 export default App;
