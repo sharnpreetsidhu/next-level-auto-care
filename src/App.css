@@ -1948,3 +1948,12 @@ footer {
     display: none;
   }
 }
+
+.made-by {
+  margin-top: 8px;
+  font-size: 0.75rem;
+}
+
+.made-by span {
+  font-weight: 600;
+}
