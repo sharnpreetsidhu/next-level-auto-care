@@ -149,16 +149,42 @@ function BackToTop() {
     };
   }, []);
 
-  return (
-    <button
-      className={showButton ? 'back-to-top show' : 'back-to-top'}
-      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      aria-label="Back to top"
+return (
+  <button
+    type="button"
+    className={showButton ? 'back-to-top show' : 'back-to-top'}
+    onClick={() => {
+      const reduceMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+
+      window.scrollTo({
+        top: 0,
+        behavior: reduceMotion ? 'auto' : 'smooth',
+      });
+    }}
+    aria-label="Back to top"
+    title="Back to top"
+  >
+    <svg
+      className="back-to-top-chevron"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
     >
-      ↑
-    </button>
-  );
+      <path d="m7 14 5-5 5 5" />
+    </svg>
+
+    <img src="/images/pressure-washer.png" alt="" />
+  </button>
+);
 }
+
+
 
 function ScrollReveal() {
   useEffect(() => {
@@ -197,7 +223,10 @@ function Navbar() {
   return (
     <nav className="navbar">
       <a href="#" className="logo-wrap" onClick={closeMenu}>
-        <img src="/images/logo.jpg" alt="Next Level Auto Care logo" />
+        <img
+  src="/images/next-level-logo-circle.png"
+  alt="Next Level Auto Care logo"
+/>
         <span>Next Level Auto Care</span>
       </a>
 
@@ -330,12 +359,12 @@ function Packages() {
 
 
 {pkg.addOns && (
-  <div className="addon-list">
-    <p className="addon-title">{pkg.addOnTitle}</p>
+  <div className="package-addons">
+    <p className="package-addons-title">Add-ons:</p>
 
-    <ul>
-      {pkg.addOns.map((addon, index) => (
-        <li key={index}>{addon}</li>
+    <ul className="package-items">
+      {pkg.addOns.map((addon) => (
+        <li key={addon}>{addon}</li>
       ))}
     </ul>
   </div>
@@ -860,15 +889,24 @@ function Booking() {
           <div className="quick-contact-buttons step-contact">
   <p>Prefer talking directly?</p>
 
-  <div className="contact-icon-row">
-    <a href="tel:7783255438" className="contact-icon-btn" aria-label="Call Next Level Auto Care">
-      📞
-    </a>
+ <div className="contact-icon-row">
+  <a
+  href="tel:7783255438"
+  className="contact-icon-btn"
+  aria-label="Call Next Level Auto Care"
+>
+  <span className="phone-emoji" aria-hidden="true">📞</span>
+</a>
 
-    <a href="sms:7783255438" className="contact-icon-btn" aria-label="Text Next Level Auto Care">
-      💬
-    </a>
-  </div>
+  <a
+  href="sms:7783255438"
+  className="contact-icon-btn"
+  aria-label="Text Next Level Auto Care"
+>
+  💬
+</a>
+
+</div>
 </div>
 
 
@@ -886,34 +924,43 @@ function Contact() {
       <p className="eyebrow center">Book Now</p>
       <h2>Ready For A Cleaner Vehicle?</h2>
       <p>
-        Call or text today to book mobile detailing, ceramic coating, paint correction,
-        or customization.
+        Call or text today to book mobile detailing, ceramic coating,
+        paint correction, or customization.
       </p>
 
       <a href="tel:7783255438" className="phone-link">
         778-325-5438
       </a>
 
-      <div className="social-links">
-  <a
-    href="https://www.instagram.com/nextlvlautocare"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Instagram"
-  >
-    <img src="/images/Instagram.png" alt="Instagram" />
-  </a>
+      <a
+        className="instagram-link"
+        href="https://www.instagram.com/nextlvlautocare"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg
+          width="19"
+          height="19"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          aria-hidden="true"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle
+            cx="17.5"
+            cy="6.5"
+            r="0.8"
+            fill="currentColor"
+            stroke="none"
+          />
+        </svg>
 
-  <a
-    href="https://www.tiktok.com/@nextlvlautocare"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="TikTok"
-  >
-    <img src="/images/tiktok.webp" alt="TikTok" />
-  </a>
-</div>
-
+        <span>See more on Instagram</span>
+        <span className="instagram-arrow" aria-hidden="true">↗</span>
+      </a>
     </section>
   );
 }

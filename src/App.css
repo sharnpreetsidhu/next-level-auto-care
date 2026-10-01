@@ -1696,3 +1696,125 @@ footer {
   font-weight: 700;
   color: #b8b8b8;
 }
+
+.instagram-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  min-height: 44px;
+  margin: 24px auto 0;
+  color: #ddd;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 200ms ease;
+}
+
+.instagram-link:hover,
+.instagram-link:focus-visible {
+  color: #d4af37;
+}
+
+.instagram-link:focus-visible {
+  outline: 1px solid #d4af37;
+  outline-offset: 5px;
+}
+
+.instagram-link svg {
+  flex-shrink: 0;
+}
+
+.instagram-arrow {
+  transition: transform 200ms ease;
+}
+
+.instagram-link:hover .instagram-arrow {
+  transform: translate(2px, -2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .instagram-link,
+  .instagram-arrow {
+    transition: none;
+  }
+
+  .instagram-link:hover .instagram-arrow {
+    transform: none;
+  }
+}
+
+/* Full-width package add-ons */
+.package-addons {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.package-addons-title {
+  margin: 0 0 12px;
+  color: #bdbdbd;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.package-addons .package-items {
+  margin: 0;
+}
+
+/* Clean phone and message icons */
+.contact-icon-btn svg {
+  width: 23px;
+  height: 23px;
+  display: block;
+}
+
+.contact-icon-btn:focus-visible {
+  outline: 2px solid #d4af37;
+  outline-offset: 4px;
+}
+
+/* Pressure-washer back-to-top button */
+.back-to-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 4px;
+}
+
+.back-to-top-chevron {
+  width: 13px;
+  height: 10px;
+  flex-shrink: 0;
+}
+
+.back-to-top img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  display: block;
+}
+
+.back-to-top:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
+}
+
+.phone-emoji {
+  filter: grayscale(1) brightness(0);
+  font-size: 23px;
+  line-height: 1;
+  display: block;
+}
+
+.phone-emoji {
+  filter: grayscale(1) brightness(0);
+  font-size: 23px;
+  line-height: 1;
+  display: block;
+}
