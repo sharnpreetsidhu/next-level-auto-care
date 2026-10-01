@@ -296,18 +296,18 @@ function Packages() {
   {
     name: ' Maintenance Detail',
     price: 'Starting at $100',
-    description: 'A inside-and-out refresh for vehicles that need a clean, simple reset.',
+    description: 'An inside-and-out refresh for vehicles that need a clean, simple reset.',
     items: [
       'Exterior hand wash',
       'Interior wipe down',
       'Vacuum',
       'Windows cleaned',
-      'Door Jams',
-      'Wheels and wheel-wells',
+      'Door Jambs',
+      'Wheels and wheel wells',
     ],
   },
   {
-    name: 'Deap Clean',
+    name: 'Deep Clean',
     price: 'Starting at $220',
     description: 'A deeper inside-and-out detail for a cleaner, sharper finished look.',
     items: [
