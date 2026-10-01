@@ -523,17 +523,12 @@ function OurWork() {
           ›
         </button>
 
-        <div className="dots">
-          {images.map((image, index) => (
-            <button
-              type="button"
-              key={image.src}
-              className={currentImage === index ? 'dot active' : 'dot'}
-              onClick={() => selectImage(index)}
-              aria-label={`Go to image ${index + 1}`}
-            />
-          ))}
-        </div>
+     <div className="gallery-counter">
+  <span>{String(currentImage + 1).padStart(2, '0')}</span>
+  <span className="gallery-counter-line"></span>
+  <span>{String(images.length).padStart(2, '0')}</span>
+</div>
+ 
       </div>
 
       {isImageOpen && (
