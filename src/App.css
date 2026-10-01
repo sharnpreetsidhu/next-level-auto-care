@@ -1957,3 +1957,66 @@ footer {
 .made-by span {
   font-weight: 600;
 }
+
+.nav-links a[href="#booking"] {
+  background: #d4af37;
+  color: #080808;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: background 200ms ease;
+}
+
+.nav-links a[href="#booking"]:hover {
+  background: #e2bf49;
+}
+
+/* Align navigation links with the booking button */
+.nav-links {
+  align-items: center;
+}
+
+.nav-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.nav-links a[href="#booking"] {
+  padding: 12px 20px;
+  font-weight: 700;
+}
+
+/* Consistent typography */
+.logo-wrap span {
+  font-weight: 800;
+}
+
+h1,
+h2 {
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+h3 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Keep mobile menu links full width */
+@media (max-width: 900px) {
+  .nav-links {
+    align-items: stretch;
+  }
+
+  .nav-links a {
+    justify-content: flex-start;
+    line-height: 1.4;
+  }
+
+  .nav-links a[href="#booking"] {
+    justify-content: center;
+  }
+}

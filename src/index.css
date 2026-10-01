@@ -1,5 +1,5 @@
 :root {
-  font-family: Arial, Helvetica, sans-serif;
+ font-family: 'Manrope', Arial, sans-serif;
   background: #080808;
   color: white;
   font-synthesis: none;
@@ -20,4 +20,11 @@ body,
 body {
   overflow-x: hidden;
   background: #080808;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
