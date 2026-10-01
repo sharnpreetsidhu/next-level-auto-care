@@ -462,7 +462,8 @@ function Packages() {
 
       <div className="packages-grid">
         {packages.map((pkg, index) => (
-          <div className="package-card reveal" key={index}>
+          <div className="package-card reveal package-card-interactive" key={index}>
+            
             <h3>{pkg.name}</h3>
 <p>{pkg.description}</p>
 <strong className="package-price">{pkg.price}</strong>
@@ -606,7 +607,7 @@ function OurWork() {
   decoding="async"
   onClick={() => setIsImageOpen(true)}
 />
-   
+
 
         </div>
 
@@ -699,35 +700,64 @@ function OurWork() {
 
 function WhyChooseUs() {
   return (
-    <section className="why-section reveal">
-      <div className="why-content">
-        <p className="eyebrow">Why Us</p>
-        <h2>Clean Results. Careful Work. Mobile Convenience.</h2>
-        <p>
-          Next Level Auto Care is built for customers who want their vehicle looking
-          sharp without the hassle of dropping it off at a shop. We focus on quality
-          workmanship, paint-safe methods, and clean results.
-        </p>
+    <section class="why-us" id="why-us" aria-labelledby="why-us-title">
+  <div class="why-us__container">
+    <div class="why-us__label">WHY US</div>
 
-     <div className="why-points">
-  <div className="reveal">
-    <h3>Mobile Service</h3>
-    <p>We come directly to your location.</p>
+    <h2 class="why-us__heading" id="why-us-title">
+      <span>Clean Results. Careful Work.</span>
+      <span>Mobile Convenience.</span>
+    </h2>
+
+    <p class="why-us__intro">
+      Next Level Auto Care is built for customers who 
+      want their vehicle looking sharp without the hassle 
+      of dropping it off at a shop. We focus on quality 
+      workmanship, paint-safe methods, and clean results.
+    </p>
+
+    <div class="why-us__grid">
+      <article class="why-us__card">
+        <svg class="why-us__icon" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="1.5"
+             stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/>
+          <circle cx="12" cy="10" r="2.5"/>
+        </svg>
+
+        <h3>Mobile Service</h3>
+        <p>We come directly to your location.</p>
+      </article>
+
+      <article class="why-us__card">
+        <svg class="why-us__icon" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="1.5"
+             stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/>
+          <path d="m12 7 1.2 3.3L16.5 12l-3.3 1.2L12 17l-1.2-3.8L7.5 12l3.3-1.7L12 7Z"/>
+        </svg>
+
+        <h3>Gloss &amp; Protection</h3>
+        <p>Services designed to improve shine and protect your finish.</p>
+      </article>
+
+      <article class="why-us__card">
+        <svg class="why-us__icon" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="1.5"
+             stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M10 13 18 3a2.1 2.1 0 0 1 3 3L11 14"/>
+          <path d="M10 13c-4-2-6 1-6 4 0 2-1 3-2 4 5 1 10-1 10-5 0-1-1-2-2-3Z"/>
+        </svg>
+
+        <h3>Attention to Detail</h3>
+        <p>Careful cleaning inside and outside your vehicle.</p>
+      </article>
+    </div>
   </div>
-
-  <div className="reveal">
-    <h3>Gloss & Protection</h3>
-    <p>Services designed to improve shine and protect your finish.</p>
-  </div>
-
-  <div className="reveal">
-    <h3>Attention To Detail</h3>
-    <p>Careful cleaning inside and outside your vehicle.</p>
-  </div>
-</div>
-
-      </div>
-    </section>
+</section>
   );
 }
 
