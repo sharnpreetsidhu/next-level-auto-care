@@ -506,12 +506,15 @@ function OurWork() {
 
         <div className="slide-image-wrap">
           <img
-            src={images[currentImage].src}
-            alt={images[currentImage].title}
-            loading="eager"
-            decoding="async"
-            onClick={() => setIsImageOpen(true)}
-          />
+  key={currentImage}
+  className="slide-image-fade"
+  src={images[currentImage].src}
+  alt={images[currentImage].title}
+  loading="eager"
+  decoding="async"
+  onClick={() => setIsImageOpen(true)}
+/>
+
         </div>
 
         <button
@@ -528,7 +531,7 @@ function OurWork() {
   <span className="gallery-counter-line"></span>
   <span>{String(images.length).padStart(2, '0')}</span>
 </div>
- 
+
       </div>
 
       {isImageOpen && (

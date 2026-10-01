@@ -2309,3 +2309,217 @@ h3 {
   height: 1px;
   background: rgba(255, 255, 255, 0.22);
 }
+
+/* Smooth gallery image change */
+.slide-image-fade {
+  animation: galleryFade 450ms ease;
+}
+
+@keyframes galleryFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.gallery-counter-arrow {
+  margin-left: 4px;
+  padding: 2px 4px;
+
+  border: none;
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 1rem;
+
+  cursor: pointer;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.gallery-counter-arrow:hover {
+  color: #d4af37;
+  transform: translateX(3px);
+}
+
+/* ===== Minimal Gallery Arrows ===== */
+
+.slide-btn {
+  width: 34px !important;
+  height: 50px !important;
+
+  border: none !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+
+  color: rgba(255, 255, 255, 0.9) !important;
+
+  font-size: 2.4rem !important;
+  font-weight: 200 !important;
+  line-height: 1 !important;
+
+  opacity: 0.75;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.slide-btn.left {
+  left: 18px !important;
+}
+
+.slide-btn.right {
+  right: 18px !important;
+}
+
+.slide-btn:hover {
+  color: #d4af37 !important;
+  opacity: 1;
+}
+
+.slide-btn.left:hover {
+  transform: translateY(-50%) translateX(-3px);
+}
+
+.slide-btn.right:hover {
+  transform: translateY(-50%) translateX(3px);
+}
+
+@media (max-width: 900px) {
+  .slide-btn {
+    width: 30px !important;
+    height: 44px !important;
+    font-size: 2rem !important;
+  }
+
+  .slide-btn.left {
+    left: 10px !important;
+  }
+
+  .slide-btn.right {
+    right: 10px !important;
+  }
+}
+
+/* ===== Premium Animated Gallery Arrows ===== */
+
+.slide-btn {
+  width: 42px !important;
+  height: 42px !important;
+
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 50% !important;
+
+  background: rgba(0, 0, 0, 0.28) !important;
+
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18) !important;
+
+  color: rgba(255, 255, 255, 0.9) !important;
+
+  opacity: 0.8;
+
+  animation: arrowBreathe 2.8s ease-in-out infinite;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    opacity 180ms ease !important;
+}
+
+.slide-btn svg {
+  width: 18px;
+  height: 18px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Position */
+.slide-btn.left {
+  left: 20px !important;
+}
+
+.slide-btn.right {
+  right: 20px !important;
+}
+
+/* Very subtle attention animation */
+@keyframes arrowBreathe {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Hover */
+.slide-btn:hover {
+  animation: none;
+
+  opacity: 1;
+
+  color: #d4af37 !important;
+
+  background: rgba(0, 0, 0, 0.65) !important;
+  border-color: rgba(212, 175, 55, 0.45) !important;
+}
+
+/* Move only the icon */
+.slide-btn.left:hover svg {
+  transform: translateX(-2px);
+}
+
+.slide-btn.right:hover svg {
+  transform: translateX(2px);
+}
+
+.slide-btn svg {
+  transition: transform 180ms ease;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .slide-btn {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .slide-btn.left {
+    left: 12px !important;
+  }
+
+  .slide-btn.right {
+    right: 12px !important;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .slide-btn {
+    animation: none;
+  }
+}
+
